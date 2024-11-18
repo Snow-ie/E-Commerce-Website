@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogoIcon from "../../assets/LogoIcon";
 import SearchIcon from "../../assets/nav/SearchIcon";
 import WishListIcon from "../../assets/nav/WishListIcon";
@@ -13,11 +13,12 @@ import LogoutIcon from "../../assets/LogoutIcon";
 
 const authRoutes = ["signup", "login"];
 
-const Navbar = () => {
+const Navbar = ({ wishlistCount, cartCount }) => {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { isAuth } = useAuthContext();
+  const { isAuth, logout } = useAuthContext();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -29,8 +30,13 @@ const Navbar = () => {
 
   const isAuthRoute = authRoutes.some((route) => pathname.includes(route));
 
+  const handleLogout = () => {
+    logout();
+    navigate("/signup");
+  };
+
   return (
-    <nav className="bg-primary px-8 py-4 flex justify-between items-center border-b border-opacity-50 relative">
+    <nav className="bg-primary px-4 py-4 flex justify-between items-center border-b border-opacity-50 relative">
       <LogoIcon />
 
       <button
@@ -62,33 +68,41 @@ const Navbar = () => {
           isOpen ? "block" : "hidden"
         } lg:flex lg:space-x-8 absolute lg:static top-16 left-0 w-full bg-primary lg:w-auto z-10 p-4 lg:p-0`}
       >
-        <li>
+        <li className="relative">
           <Link to="/" className="text-primary1 block py-2 lg:py-0">
             Home
           </Link>
-          {pathname === "/" ? <hr /> : <></>}
+          {pathname === "/" && (
+            <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
+          )}
         </li>
 
-        <li>
+        <li className="relative">
           <Link to="/contact" className="block py-2 lg:py-0">
             Contact
           </Link>
-          {pathname.includes("contact") ? <hr /> : <></>}
+          {pathname.includes("/contact") && (
+            <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
+          )}
         </li>
 
-        <li>
+        <li className="relative">
           <Link to="/about" className="block py-2 lg:py-0">
             About
           </Link>
-          {pathname.includes("about") ? <hr /> : <></>}
+          {pathname.includes("/about") && (
+            <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
+          )}
         </li>
 
         {!isAuth && (
-          <li>
+          <li className="relative">
             <Link to="/signup" className="block py-2 lg:py-0">
               Sign Up
             </Link>
-            {pathname.includes("signup") ? <hr /> : <></>}
+            {pathname.includes("/signup") && (
+              <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
+            )}
           </li>
         )}
       </ul>
@@ -111,12 +125,22 @@ const Navbar = () => {
 
         {!isAuthRoute && (
           <div className="space-x-2 flex">
-            <button className="text-2xl">
+            <Link to="/wishlist" className="relative text-2xl">
               <WishListIcon />
-            </button>
-            <button className="text-2xl">
+              {wishlistCount > 0 && (
+                <span className="absolute top-0 right-0 rounded-full bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+            <Link to="/cart" className="relative text-2xl">
               <CartIcon />
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 rounded-full bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </div>
         )}
         {isAuth && (
@@ -159,13 +183,13 @@ const Navbar = () => {
                   <ReviewsIcon />
                   <span>My Reviews</span>
                 </Link>
-                <Link
-                  to="/logout"
+                <button
+                  onClick={handleLogout}
                   className="flex items-center space-x-2 px-4 py-2 hover:bg-secondary1 rounded"
                 >
                   <LogoutIcon />
                   <span>Logout</span>
-                </Link>
+                </button>
               </div>
             )}
           </div>

@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faEye, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faEye,
+  faStar,
+  faStarHalfAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ProductCard = ({ product }) => {
   const {
@@ -47,7 +52,6 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      {/* Wishlist & View Buttons */}
       <div className="absolute top-[5px] right-[5px] flex flex-col space-y-2">
         <button className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200 transition-colors duration-200">
           <FontAwesomeIcon icon={faHeart} className="text-gray-500" />
@@ -57,7 +61,6 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
 
-      {/* Product Details */}
       <div className="mt-4">
         <h3 className="text-base font-normal">{name}</h3>
         <div className="mt-2 flex items-center space-x-4">
@@ -66,16 +69,34 @@ const ProductCard = ({ product }) => {
           </span>
           <span className="text-gray-400 line-through">${originalPrice}</span>
         </div>
-        <div className="mt-2 flex items-center text-yellow-400">
-          {[...Array(5)].map((_, i) => (
-            <FontAwesomeIcon
-              key={i}
-              icon={faStar}
-              className={
-                i < Math.round(rating) ? "text-yellow-400" : "text-gray-300"
-              }
-            />
-          ))}
+        <div className="mt-2 flex items-center text-secondary2">
+          {[...Array(5)].map((_, i) => {
+            if (i < Math.floor(rating)) {
+              return (
+                <FontAwesomeIcon
+                  key={i}
+                  icon={faStar}
+                  className="text-secondary2"
+                />
+              );
+            } else if (i < rating) {
+              return (
+                <FontAwesomeIcon
+                  key={i}
+                  icon={faStarHalfAlt}
+                  className="text-secondary2"
+                />
+              );
+            } else {
+              return (
+                <FontAwesomeIcon
+                  key={i}
+                  icon={faStar}
+                  className="text-gray-300"
+                />
+              );
+            }
+          })}
           <span className="ml-2 text-gray-500 text-sm">({reviews})</span>
         </div>
       </div>

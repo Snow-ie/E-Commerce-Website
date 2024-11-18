@@ -13,6 +13,9 @@ import Controller4 from "../assets/images/Controller4.svg";
 import DeliveryIcon from "../assets/product/DeliveryIcon";
 import ReturnIcon from "../assets/product/ReturnIcon";
 import WishListIcon from "../assets/nav/WishListIcon";
+import ProductCard from "../components/homepage/flashcard/ProductCard";
+import { products } from "../utils/data";
+import RectangleIcon from "../assets/RectangleIcon";
 
 const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -191,6 +194,15 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex items-center gap-6 mt-8">
+        <RectangleIcon />
+        <h4 className="text-secondary1">Related Item</h4>
+      </div>
+      <div className="flex items-center gap-5 w-full py-[70px] overflow-x-auto">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );

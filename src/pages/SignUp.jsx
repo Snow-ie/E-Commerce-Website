@@ -5,9 +5,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import useAuthContext from "../components/hooks/useAuthProvider";
 
 const SignUp = ({ setHasAccount }) => {
   const { pathname } = useLocation();
+  const { isAuth } = useAuthContext();
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
@@ -47,6 +49,10 @@ const SignUp = ({ setHasAccount }) => {
       navigate("/login");
     }
   };
+
+  if (!isAuth) {
+    navigate("/");
+  }
 
   return (
     <div className="bg-primary flex flex-col">

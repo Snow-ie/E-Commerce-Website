@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -19,6 +18,10 @@ import useAuthContext, {
 import Layout from "./components/layout/Layout";
 import Contact from "./pages/Contact";
 import ProductPage from "./pages/ProductPage";
+import WishListPage from "./pages/WishListPage";
+import CartPage from "./pages/CartPage";
+import Account from "./pages/Account";
+import Checkout from "./pages/Checkout";
 
 function App() {
   const { isAuth } = useAuthContext();
@@ -45,6 +48,22 @@ function App() {
           element: <ProductPage />,
         },
         {
+          path: "/wishlist",
+          element: <WishListPage />,
+        },
+        {
+          path: "/cart",
+          element: <CartPage />,
+        },
+        {
+          path: "/account",
+          element: <Account />,
+        },
+        {
+          path: "/checkout",
+          element: <Checkout />,
+        },
+        {
           element: isAuth ? <Navigate to="/" /> : <Outlet />,
           children: [
             {
@@ -55,6 +74,7 @@ function App() {
               path: "/login",
               element: <Login />,
             },
+            ,
           ],
         },
         {

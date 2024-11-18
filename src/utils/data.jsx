@@ -30,20 +30,24 @@ import SatinJacket from "../assets/images/SatinJacket.svg";
 
 export const socials = [
   {
-    name: "facebook",
+    name: "Facebook",
     icon: <IconFacebook />,
+    url: "https://www.facebook.com/your-page",
   },
   {
     name: "Instagram",
     icon: <IconInstagram />,
+    url: "https://www.instagram.com/your-profile",
   },
   {
     name: "X",
     icon: <IconTwitter />,
+    url: "https://www.twitter.com/your-handle", // Replace with your X (formerly Twitter) profile link
   },
   {
-    name: "Linkedin",
+    name: "LinkedIn",
     icon: <IconLinkedin />,
+    url: "https://www.linkedin.com/in/your-profile",
   },
 ];
 
@@ -93,7 +97,7 @@ export const products = [
     discountPrice: 375,
     discount: 25,
     image: ComfortChair,
-    rating: 4,
+    rating: 4.5,
     reviews: 99,
     name: "S-Series Comfort Chair",
   },

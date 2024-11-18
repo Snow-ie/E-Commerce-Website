@@ -5,9 +5,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import useAuthContext from "../components/hooks/useAuthProvider";
 
 const Login = ({ setHasAccount }) => {
   const [error, setError] = useState(null);
+  const { isAuth } = useAuthContext();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -42,6 +44,10 @@ const Login = ({ setHasAccount }) => {
       setError("Invalid email or password. Please try again.");
     }
   };
+
+  if (!isAuth) {
+    navigate("/");
+  }
 
   return (
     <div className="bg-primary flex flex-col">

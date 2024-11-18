@@ -10,9 +10,18 @@ const Error404 = () => {
 
   return (
     <div className="container mx-auto px-4 ">
-      <div className="text-sm mt-4">
-        Home / <span>404 Error</span>
-      </div>
+      <nav aria-label="Breadcrumb" className="text-sm mt-4 text-gray-600">
+        <ol className="list-none flex space-x-2">
+          <li>
+            <a href="/" className="hover:underline text-gray-700">
+              Home
+            </a>
+          </li>
+          <li>/</li>
+          <li className="text-black font-semibold">404 Error</li>
+        </ol>
+      </nav>
+
       <div className="flex flex-col items-center justify-center my-8">
         <h1 className="text-6xl font-medium mb-4">404 Not Found</h1>
         <p className="text-gray-500 mt-8">

@@ -6,10 +6,19 @@ import Team from "../components/about/Team";
 
 const About = () => {
   return (
-    <div className="container mx-auto px-4 ">
-      <div className="text-sm mt-5">
-        Home / <span>About</span>
-      </div>
+    <div className="container mx-auto px-4  ">
+      <nav aria-label="Breadcrumb" className="text-sm mt-5 text-gray-600">
+        <ol className="list-none flex space-x-2">
+          <li>
+            <a href="/" className="hover:underline text-gray-700">
+              Home
+            </a>
+          </li>
+          <li>/</li>
+          <li className="text-black font-medium">About</li>
+        </ol>
+      </nav>
+
       <div className="grid md:grid-cols-2 gap-8 mt-12 pb-[70px]">
         <div className="">
           <h1 className="text-4xl font-semibold mt-10">Our Story</h1>

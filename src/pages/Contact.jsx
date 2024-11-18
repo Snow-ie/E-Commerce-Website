@@ -30,9 +30,17 @@ function Contact() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="text-sm my-5 text-gray-600">
-        Home / <span className="text-gray-800">Contact</span>
-      </div>
+      <nav aria-label="Breadcrumb" className="text-sm my-5">
+        <ol className="list-none flex space-x-2 text-gray-500">
+          <li>
+            <a href="/" className="hover:underline text-gray-700">
+              Home
+            </a>
+          </li>
+          <li>/</li>
+          <li className="text-black font-semibold">Contact</li>
+        </ol>
+      </nav>
       <div className="flex justify-center my-10">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="bg-white p-8 w-full md:w-[340px] rounded-lg shadow-md">
@@ -68,104 +76,108 @@ function Contact() {
 
           <div className="bg-white p-8 rounded-lg shadow-md w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <div className="flex flex-col sm:flex-row sm:space-x-4">
+              <div className="flex flex-col sm:flex-row sm:space-x-6">
                 <div className="flex-1 relative">
                   <input
                     type="text"
                     id="name"
                     placeholder=" "
                     {...register("name")}
-                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-secondary4 rounded-lg border-1 border-gray-300 appearance-none ${
+                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm bg-secondary4 rounded-lg  focus:outline-none focus:ring-0 focus:border-hoverbutton peer ${
                       errors.name
-                        ? "border-secondary1 focus:ring-secondary1"
-                        : "border-gray-300 focus:ring-secondary1"
+                        ? "border-secondary1 focus:border-secondary1"
+                        : ""
                     }`}
                   />
                   <label
                     htmlFor="name"
-                    className="absolute text-gray-500 text-sm transition-all duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-hoverbutton peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4"
                   >
                     Your Name <span className="text-secondary1">*</span>
                   </label>
                   {errors.name && (
-                    <p className="text-secondary1 text-sm">
+                    <p className=" mt-4 text-secondary1 text-sm">
                       {errors.name.message}
                     </p>
                   )}
                 </div>
+
                 <div className="flex-1 relative">
                   <input
                     type="email"
                     id="email"
                     placeholder=" "
                     {...register("email")}
-                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-secondary4 rounded-lg border-1 border-gray-300 appearance-none ${
+                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm bg-secondary4 rounded-lg  focus:outline-none focus:ring-0 focus:border-hoverbutton peer ${
                       errors.email
-                        ? "border-secondary1 focus:ring-secondary1"
-                        : "border-gray-300 focus:ring-secondary1"
+                        ? "border-secondary1 focus:border-secondary1"
+                        : ""
                     }`}
                   />
                   <label
                     htmlFor="email"
-                    className="absolute text-gray-500 text-sm transition-all duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-hoverbutton peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4"
                   >
-                    Your Email <span className="text-secondary1-">*</span>
+                    Your Email <span className="text-secondary1">*</span>
                   </label>
                   {errors.email && (
-                    <p className="text-secondary1 text-sm">
+                    <p className="mt-4 text-secondary1 text-sm">
                       {errors.email.message}
                     </p>
                   )}
                 </div>
+
                 <div className="flex-1 relative">
                   <input
                     type="tel"
                     id="phone"
                     placeholder=" "
                     {...register("phone")}
-                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-secondary4 rounded-lg border-1 border-gray-300 appearance-none ${
+                    className={`block px-2.5 pb-2.5 pt-4 w-full text-sm bg-secondary4 rounded-lg  focus:outline-none focus:ring-0 focus:border-hoverbutton peer${
                       errors.phone
-                        ? "border-secondary1 focus:ring-secondary1"
-                        : "border-gray-300 focus:ring-secondary1"
+                        ? "border-secondary1 focus:border-secondary1"
+                        : ""
                     }`}
                   />
                   <label
                     htmlFor="phone"
-                    className="absolute text-gray-500 text-sm transition-all duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-hoverbutton peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4"
                   >
                     Your Phone <span className="text-secondary1">*</span>
                   </label>
                   {errors.phone && (
-                    <p className="text-secondary1 text-sm">
+                    <p className="mt-4 text-secondary1 text-sm">
                       {errors.phone.message}
                     </p>
                   )}
                 </div>
               </div>
+
               <div className="relative">
                 <textarea
                   id="message"
                   placeholder=" "
                   {...register("message")}
-                  className={`block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-secondary4 rounded-lg border-1 border-gray-300 appearance-none ${
+                  className={`block px-2.5 pb-2.5 pt-4 w-full text-sm bg-secondary4 rounded-lg  focus:outline-none focus:ring-0 focus:border-hoverbutton peer ${
                     errors.message
-                      ? "border-secondary1 focus:ring-secondary1"
-                      : "border-gray-300 focus:ring-secondary1"
+                      ? "border-secondary1 focus:border-secondary1"
+                      : ""
                   }`}
                   rows="4"
                 ></textarea>
                 <label
                   htmlFor="message"
-                  className="absolute text-gray-500 text-sm transition-all duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white"
+                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent px-2 peer-focus:px-2 peer-focus:text-hoverbutton peer-placeholder-shown:scale-100 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4"
                 >
-                  Your Message <span className="text-secondary1-500">*</span>
+                  Your Message <span className="text-secondary1">*</span>
                 </label>
                 {errors.message && (
-                  <p className="text-secondary1 text-sm">
+                  <p className="mt-4 text-secondary1 text-sm">
                     {errors.message.message}
                   </p>
                 )}
               </div>
+
               <div className="flex justify-end mt-4">
                 <button
                   type="submit"

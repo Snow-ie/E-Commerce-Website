@@ -58,19 +58,18 @@ const Footer = () => {
               <ul className="space-y-2 text-base text-primary text-opacity-30">
                 {footerLinks.account.map((item, index) => (
                   <li key={index}>
-                    <a href="#">{item}</a>
+                    <a href={item.link}>{item.name}</a>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Quick Links */}
             <div className="space-y-4">
               <h3 className="text-xl font-medium">Quick Link</h3>
               <ul className="space-y-2 text-base text-primary text-opacity-30">
                 {footerLinks.quickLinks.map((link, index) => (
                   <li key={index}>
-                    <a href="#">{link}</a>
+                    <a href={link.link}>{link.name}</a>
                   </li>
                 ))}
               </ul>
@@ -82,14 +81,14 @@ const Footer = () => {
                 Save $3 with App New User Only
               </p>
               <div className="flex space-x-2">
-                <a href="#">
+                <a href="https://example.com/qrcode">
                   <img src={Qrcode} alt="QR code" />
                 </a>
                 <div className="flex flex-col space-y-2">
-                  <a href="#">
+                  <a href="https://play.google.com/store">
                     <img src={GooglePlay} alt="Google Play" />
                   </a>
-                  <a href="#">
+                  <a href="https://www.apple.com/app-store/">
                     <img src={AppStore} alt="App Store" />
                   </a>
                 </div>
@@ -97,7 +96,12 @@ const Footer = () => {
               <ul className="flex space-x-4">
                 {socials.map((item) => (
                   <li key={item.name}>
-                    <a href={item.url} className="hover:text-secondary1">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-secondary1 cursor-pointer"
+                    >
                       {item.icon}
                     </a>
                   </li>
