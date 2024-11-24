@@ -7,21 +7,20 @@ const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
 
-  const toggleWomens = () => {
-    setIsWomensOpen(!isWomensOpen);
-  };
-
-  const toggleMens = () => {
-    setIsMensOpen(!isMensOpen);
+  const toggleDropdown = (setState) => {
+    setState((prev) => !prev);
   };
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen((prev) => !prev);
   };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        !event.target.closest("#sidebarToggleBtn")
+      ) {
         setIsSidebarOpen(false);
       }
     };
@@ -31,7 +30,6 @@ const Sidebar = () => {
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -40,6 +38,7 @@ const Sidebar = () => {
   return (
     <div className="relative">
       <button
+        id="sidebarToggleBtn"
         className="fixed top-10 left-0 p-2 bg-red-500 text-white hover:bg-red-600 transition-all duration-300 z-50 md:hidden"
         onClick={toggleSidebar}
       >
@@ -74,7 +73,7 @@ const Sidebar = () => {
 
       <div
         ref={sidebarRef}
-        className={`absolute bg-primary p-2 border-r border-primary1 border-opacity-50 transform z-10
+        className={`fixed bg-primary p-2 border-r border-primary1 border-opacity-50 transform z-40
           ${
             isSidebarOpen ? "left-0" : "-left-[100vw]"
           } transition-all duration-300
@@ -83,7 +82,7 @@ const Sidebar = () => {
         <ul className="space-y-2">
           <li>
             <button
-              onClick={toggleWomens}
+              onClick={() => toggleDropdown(setIsWomensOpen)}
               className="w-full px-3 py-2 rounded-lg text-left bg-white hover:bg-secondary1 hover:text-white flex justify-between items-center shadow-md transition-all duration-200"
             >
               <span className="font-medium">Woman's Fashion</span>
@@ -106,7 +105,7 @@ const Sidebar = () => {
 
           <li>
             <button
-              onClick={toggleMens}
+              onClick={() => toggleDropdown(setIsMensOpen)}
               className="w-full px-3 py-2 rounded-lg text-left bg-white hover:bg-secondary1 hover:text-white flex justify-between items-center shadow-md transition-all duration-200"
             >
               <span className="font-medium">Men's Fashion</span>
@@ -127,62 +126,24 @@ const Sidebar = () => {
             )}
           </li>
 
-          <li className="hover:text-secondary1 hover:text-opacity-40">
-            <a
-              href="#"
-              className="px-3 py-2 block rounded-lg hover:bg-secondary1 hover:text-white transition-all duration-200"
-            >
-              Electronics
-            </a>
-          </li>
-          <li className="hover:text-secondary1 hover:text-opacity-40">
-            <a
-              href="#"
-              className="px-3 py-2 block rounded-lg hover:bg-secondary1 hover:text-white transition-all duration-200"
-            >
-              Home & Lifestyle
-            </a>
-          </li>
-          <li className="hover:text-secondary1 hover:text-opacity-40">
-            <a
-              href="#"
-              className="px-3 py-2 block rounded-lg hover:bg-secondary1 hover:text-white transition-all duration-200"
-            >
-              Medicine
-            </a>
-          </li>
-          <li className="hover:text-secondary1 hover:text-opacity-40">
-            <a
-              href="#"
-              className="px-3 py-2 block rounded-lg hover:bg-secondary1 hover:text-white transition-all duration-200"
-            >
-              Sports & Outdoor
-            </a>
-          </li>
-          <li className="hover:text-secondary1 hover:text-opacity-40">
-            <a
-              href="#"
-              className="px-3 py-2 block rounded-lg hover:bg-secondary1 hover:text-white transition-all duration-200"
-            >
-              Baby's & Toys
-            </a>
-          </li>
-          <li className="hover:text-secondary1 hover:text-opacity-40">
-            <a
-              href="#"
-              className="px-3 py-2 block rounded-lg hover:bg-secondary1 hover:text-white transition-all duration-200"
-            >
-              Groceries & Pets
-            </a>
-          </li>
-          <li className="hover:text-secondary1 hover:text-opacity-40">
-            <a
-              href="#"
-              className="px-3 py-2 block rounded-lg hover:bg-secondary1 hover:text-white transition-all duration-200"
-            >
-              Health & Beauty
-            </a>
-          </li>
+          {[
+            "Electronics",
+            "Home & Lifestyle",
+            "Medicine",
+            "Sports & Outdoor",
+            "Baby's & Toys",
+            "Groceries & Pets",
+            "Health & Beauty",
+          ].map((item, index) => (
+            <li key={index}>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-secondary1 hover:text-white"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

@@ -50,7 +50,7 @@ const Checkout = () => {
           <li>/</li>
           <li>
             <a
-              href="/view-cart"
+              href="/cart"
               className="hover:underline text-gray-700 cursor-pointer"
             >
               View Cart

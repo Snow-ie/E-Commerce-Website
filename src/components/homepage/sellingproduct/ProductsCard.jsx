@@ -6,9 +6,19 @@ import {
   faStar,
   faStarHalfAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { addToWishlist } from "../../../redux/wishlist/wishlistSlice";
+import { toast } from "react-toastify";
 
 const ProductsCard = ({ item }) => {
-  const { image, originalPrice, discountedPrice, rating, reviews, name } = item;
+  const { image, price, discountPrice, rating, reviews, name } = item;
+
+  const dispatch = useDispatch();
+
+  const handleAddToWishlist = (product) => {
+    toast.success("Item added to wishlist!");
+    dispatch(addToWishlist(product));
+  };
 
   return (
     <div className="relative rounded-lg">
@@ -23,10 +33,17 @@ const ProductsCard = ({ item }) => {
       </div>
 
       <div className="absolute top-[5px] right-[5px] flex flex-col space-y-2">
-        <button className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200">
+        <button
+          onClick={() => handleAddToWishlist(item)}
+          className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200"
+          aria-label="Add to Wishlist"
+        >
           <FontAwesomeIcon icon={faHeart} className="text-gray-500" />
         </button>
-        <button className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200">
+        <button
+          className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200"
+          aria-label="View Product"
+        >
           <FontAwesomeIcon icon={faEye} className="text-gray-500" />
         </button>
       </div>
@@ -35,9 +52,9 @@ const ProductsCard = ({ item }) => {
         <h3 className="text-base font-normal">{name}</h3>
         <div className="mt-2 flex items-center space-x-4">
           <span className="text-secondary1 text-base font-normal">
-            ${discountedPrice}
+            ${discountPrice}
           </span>
-          <span className="text-gray-400 line-through">${originalPrice}</span>
+          <span className="text-gray-400 line-through">${price}</span>
         </div>
 
         <div className="mt-2 flex items-center text-secondary2">

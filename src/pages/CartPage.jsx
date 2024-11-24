@@ -1,41 +1,33 @@
-import React, { useState } from "react";
-import GamePad from "../assets/images/Gamepad.svg";
-import Monitor from "../assets/images/Monitor.svg";
-const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "LCD Monitor",
-      price: 650,
-      quantity: 1,
-      image: Monitor,
-    },
-    {
-      id: 2,
-      name: "H1 Gamepad",
-      price: 550,
-      quantity: 2,
-      image: GamePad,
-    },
-  ]);
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateQuantity, removeFromCart } from "../redux/cart/cartSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons"; //
 
-  const updateQuantity = (id, quantity) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: parseInt(quantity, 10) } : item
-      )
-    );
-  };
+const Cart = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
 
   const calculateSubtotal = () => {
     return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
+      (total, item) =>
+        total +
+        (item?.discountPrice ? item.discountPrice : item?.price) *
+          item.quantity,
       0
     );
   };
 
+  const handleUpdateQuantity = (id, quantity) => {
+    dispatch(updateQuantity({ id, quantity: parseInt(quantity, 10) }));
+  };
+
+  const handleRemove = (id) => {
+    dispatch(removeFromCart({ id }));
+  };
+
   return (
-    <div className="container mx-auto px-4 ">
+    <div className="container mx-auto px-4">
       <nav className="text-sm my-5" aria-label="Breadcrumb">
         <ol className="list-none flex items-center space-x-2 md:space-x-3">
           <li>
@@ -52,16 +44,17 @@ const Cart = () => {
         <table className="w-full text-left">
           <thead>
             <tr>
-              <th className="py-2">Product</th>
-              <th className="py-2">Price</th>
-              <th className="py-2">Quantity</th>
-              <th className="py-2">Subtotal</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {cartItems.map((item) => (
               <tr key={item.id} className="border-t">
-                <td className="py-4 flex items-center">
+                <td className="flex items-center py-4">
                   <img
                     src={item.image}
                     alt={item.name}
@@ -69,12 +62,15 @@ const Cart = () => {
                   />
                   {item.name}
                 </td>
-                <td className="py-4">${item.price}</td>
-                <td className="py-4">
+                <td>
+                  ${item?.discountPrice ? item.discountPrice : item?.price}
+                </td>
+                <td>
                   <select
                     value={item.quantity}
-                    onChange={(e) => updateQuantity(item.id, e.target.value)}
-                    className="border rounded px-2 py-1"
+                    onChange={(e) =>
+                      handleUpdateQuantity(item.id, e.target.value)
+                    }
                   >
                     {[...Array(10).keys()].map((n) => (
                       <option key={n + 1} value={n + 1}>
@@ -83,16 +79,29 @@ const Cart = () => {
                     ))}
                   </select>
                 </td>
-                <td className="py-4">${item.price * item.quantity}</td>
+                <td>
+                  $
+                  {(item?.discountPrice ? item.discountPrice : item?.price) *
+                    item.quantity}
+                </td>
+                <td>
+                  <button
+                    onClick={() => handleRemove(item.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <FontAwesomeIcon icon={faTrash} className="h-5 w-5" />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
       <div className="flex justify-between items-center mb-8">
-        <button className="border border-gray-400  px-4 py-2 rounded-lg">
-          Return To Shop
+        <button className="border border-gray-400 px-4 py-2 rounded-lg">
+          <a href="./" className="">
+            Return To Shop
+          </a>
         </button>
         <button className="border border-gray-400 px-4 py-2 rounded-lg">
           Update Cart
@@ -126,7 +135,9 @@ const Cart = () => {
             <span>${calculateSubtotal()}</span>
           </div>
           <button className="mt-4 w-full bg-secondary1 text-white py-2 rounded-lg">
-            Proceed to checkout
+            <a href="/checkout" className="">
+              Proceed to checkout
+            </a>
           </button>
         </div>
       </div>

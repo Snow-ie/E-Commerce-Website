@@ -15,13 +15,18 @@ import Error from "./pages/Error";
 import useAuthContext, {
   AuthProvider,
 } from "./components/hooks/useAuthProvider";
+
 import Layout from "./components/layout/Layout";
 import Contact from "./pages/Contact";
 import ProductPage from "./pages/ProductPage";
-import WishListPage from "./pages/WishListPage";
+
 import CartPage from "./pages/CartPage";
 import Account from "./pages/Account";
 import Checkout from "./pages/Checkout";
+import WishListPage from "./pages/WishListPage";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { isAuth } = useAuthContext();
@@ -89,6 +94,7 @@ function App() {
     <AuthProvider>
       {" "}
       <RouterProvider router={router} />
+      <ToastContainer />
     </AuthProvider>
   );
 }

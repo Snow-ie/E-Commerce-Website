@@ -10,30 +10,30 @@ import MallbagIcon from "../../assets/MallbagIcon";
 import CancelIcon from "../../assets/CancelIcon";
 import ReviewsIcon from "../../assets/ReviewsIcon";
 import LogoutIcon from "../../assets/LogoutIcon";
+import { useSelector } from "react-redux";
+import { selectCartCount } from "../../redux/cart/cartSlice";
+import { selectWishlistCount } from "../../redux/wishlist/wishlistSlice";
 
-const authRoutes = ["signup", "login"];
-
-const Navbar = ({ wishlistCount, cartCount }) => {
+const Navbar = () => {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isAuth, logout } = useAuthContext();
   const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const cartCount = useSelector(selectCartCount);
+  const wishlistCount = useSelector(selectWishlistCount);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const isAuthRoute = authRoutes.some((route) => pathname.includes(route));
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   const handleLogout = () => {
     logout();
     navigate("/signup");
   };
+
+  const authRoutes = ["signup", "login"];
+  const isAuthRoute = authRoutes.some((route) => pathname.includes(route));
 
   return (
     <nav className="bg-primary px-4 py-4 flex justify-between items-center border-b border-opacity-50 relative">
@@ -63,46 +63,32 @@ const Navbar = ({ wishlistCount, cartCount }) => {
         </svg>
       </button>
 
+      {/* Navigation Links */}
       <ul
         className={`${
           isOpen ? "block" : "hidden"
         } lg:flex lg:space-x-8 absolute lg:static top-16 left-0 w-full bg-primary lg:w-auto z-10 p-4 lg:p-0`}
       >
-        <li className="relative">
-          <Link to="/" className="text-primary1 block py-2 lg:py-0">
+        <li>
+          <Link to="/" className="block py-2 lg:py-0">
             Home
           </Link>
-          {pathname === "/" && (
-            <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
-          )}
         </li>
-
-        <li className="relative">
+        <li>
           <Link to="/contact" className="block py-2 lg:py-0">
             Contact
           </Link>
-          {pathname.includes("/contact") && (
-            <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
-          )}
         </li>
-
-        <li className="relative">
+        <li>
           <Link to="/about" className="block py-2 lg:py-0">
             About
           </Link>
-          {pathname.includes("/about") && (
-            <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
-          )}
         </li>
-
         {!isAuth && (
-          <li className="relative">
+          <li>
             <Link to="/signup" className="block py-2 lg:py-0">
               Sign Up
             </Link>
-            {pathname.includes("/signup") && (
-              <hr className="absolute bottom-0 left-0 w-full max-w-xs mx-auto border-t-2 border-primary1 hidden lg:block" />
-            )}
           </li>
         )}
       </ul>
@@ -112,9 +98,8 @@ const Navbar = ({ wishlistCount, cartCount }) => {
           <input
             type="text"
             placeholder="What are you looking for?"
-            className="block px-4 py-2 pl-4 border rounded w-[243px] group-hover:w-[300px] transition-all duration-300"
+            className="block px-4 py-2 pl-4 border rounded w-[243px]"
           />
-
           <button
             type="submit"
             className="absolute top-0 right-0 h-full p-2.5 text-lg font-medium"
@@ -128,7 +113,7 @@ const Navbar = ({ wishlistCount, cartCount }) => {
             <Link to="/wishlist" className="relative text-2xl">
               <WishListIcon />
               {wishlistCount > 0 && (
-                <span className="absolute top-0 right-0 rounded-full bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center">
+                <span className="absolute top-0 right-0 bg-red-600 text-white text-xs w-3 h-3 flex items-center justify-center rounded-full">
                   {wishlistCount}
                 </span>
               )}
@@ -136,38 +121,39 @@ const Navbar = ({ wishlistCount, cartCount }) => {
             <Link to="/cart" className="relative text-2xl">
               <CartIcon />
               {cartCount > 0 && (
-                <span className="absolute top-0 right-0 rounded-full bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center">
+                <span className="absolute top-0 right-0 bg-red-600 text-white text-xs w-3 h-3 flex items-center justify-center rounded-full">
                   {cartCount}
                 </span>
               )}
             </Link>
           </div>
         )}
+
         {isAuth && (
           <div className="relative">
             <button
               onClick={toggleDropdown}
-              className={`text-2xl flex items-center focus:outline-none rounded-full p-2 transition-colors ${
+              className={`text-2xl flex items-center p-2 rounded-full ${
                 isDropdownOpen ? "bg-secondary1 text-white" : ""
               }`}
             >
               <UserIcon />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-5 mt-2 w-[225px] h-[208px] bg-blur bg-black text-white rounded-lg  p-2 z-50">
+              <div className="absolute right-5 mt-2 w-[225px] bg-black text-white rounded-lg p-2 z-50">
                 <Link
                   to="/account"
-                  className="flex items-center space-x-2 px-4 py-2 hover:bg-secondary1 rounded"
+                  className="flex items-center px-4 py-2 hover:bg-secondary1 rounded"
                 >
                   <UserIcon />
                   <span>Manage My Account</span>
                 </Link>
                 <Link
                   to="/orders"
-                  className="flex items-center space-x-2 px-4 py-2 hover:bg-secondary1 rounded"
+                  className="flex items-center px-4 py-2 hover:bg-secondary1 rounded"
                 >
                   <MallbagIcon />
-                  <span>My Order</span>
+                  <span>My Orders</span>
                 </Link>
                 <Link
                   to="/cancellations"
@@ -185,7 +171,7 @@ const Navbar = ({ wishlistCount, cartCount }) => {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center space-x-2 px-4 py-2 hover:bg-secondary1 rounded"
+                  className="flex items-center px-4 py-2 hover:bg-secondary1 rounded"
                 >
                   <LogoutIcon />
                   <span>Logout</span>

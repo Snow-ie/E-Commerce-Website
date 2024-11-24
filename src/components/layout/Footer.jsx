@@ -29,7 +29,6 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-
             <div className="space-y-4">
               <h3 className="text-xl font-medium">Support</h3>
               <p>111 Bijoy Sarani, Dhaka, DH 1515, Bangladesh</p>
@@ -52,7 +51,6 @@ const Footer = () => {
                 </a>
               </p>
             </div>
-
             <div className="space-y-4">
               <h3 className="text-xl font-medium">Account</h3>
               <ul className="space-y-2 text-base text-primary text-opacity-30">
@@ -63,7 +61,6 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-
             <div className="space-y-4">
               <h3 className="text-xl font-medium">Quick Link</h3>
               <ul className="space-y-2 text-base text-primary text-opacity-30">

@@ -42,7 +42,7 @@ export const socials = [
   {
     name: "X",
     icon: <IconTwitter />,
-    url: "https://www.twitter.com/your-handle", // Replace with your X (formerly Twitter) profile link
+    url: "https://www.twitter.com/your-handle",
   },
   {
     name: "LinkedIn",
@@ -52,15 +52,34 @@ export const socials = [
 ];
 
 export const footerLinks = {
-  account: ["My Account", "Login / Register", "Cart", "Wishlist", "Shop"],
-  quickLinks: ["Privacy Policy", "Terms Of Use", "FAQ", "Contact"],
+  account: [
+    { name: "My Account", link: "/account" },
+    { name: "Login / Register", link: "/login" },
+    { name: "Cart", link: "/cart" },
+    { name: "Wishlist", link: "/wishlist" },
+    { name: "Shop", link: "/shop" },
+  ],
+  quickLinks: [
+    { name: "Privacy Policy", link: "/privacy-policy" },
+    { name: "Terms Of Use", link: "/terms-of-use" },
+    { name: "FAQ", link: "/faq" },
+    { name: "Contact", link: "/contact" },
+  ],
 };
+export const categories = [
+  { name: "Phones", icon: <CellPhoneIcon />, isSelected: false },
+  { name: "Computers", icon: <ComputerIcon />, isSelected: false },
+  { name: "SmartWatch", icon: <SmartWatchIcon />, isSelected: false },
+  { name: "Camera", icon: <CameraIcon />, isSelected: true },
+  { name: "HeadPhones", icon: <HeadPhoneIcon />, isSelected: false },
+  { name: "Gaming", icon: <GamePadIcons />, isSelected: false },
+];
 
 export const products = [
   {
     id: 1,
     name: "HAVIT HV-G92 Gamepad",
-    originalPrice: 160,
+    price: 160,
     discountPrice: 120,
     discount: 40,
     image: GamePad,
@@ -71,7 +90,7 @@ export const products = [
   {
     id: 2,
     name: "AK-900 Wired Keyboard",
-    originalPrice: 1160,
+    price: 1160,
     discountPrice: 960,
     discount: 35,
     image: Keyboard,
@@ -82,7 +101,7 @@ export const products = [
   {
     id: 3,
     name: "IPS LCD Gaming Monitor",
-    originalPrice: 400,
+    price: 400,
     discountPrice: 370,
     discount: 30,
     image: Monitor,
@@ -93,7 +112,7 @@ export const products = [
   {
     id: 4,
     name: "S-Series Comfort Chair",
-    originalPrice: 400,
+    price: 400,
     discountPrice: 375,
     discount: 25,
     image: ComfortChair,
@@ -102,53 +121,50 @@ export const products = [
     name: "S-Series Comfort Chair",
   },
 ];
-export const categories = [
-  { name: "Phones", icon: <CellPhoneIcon />, isSelected: false },
-  { name: "Computers", icon: <ComputerIcon />, isSelected: false },
-  { name: "SmartWatch", icon: <SmartWatchIcon />, isSelected: false },
-  { name: "Camera", icon: <CameraIcon />, isSelected: true },
-  { name: "HeadPhones", icon: <HeadPhoneIcon />, isSelected: false },
-  { name: "Gaming", icon: <GamePadIcons />, isSelected: false },
-];
 
 export const bestproduct = [
   {
+    id: 1,
     image: NorthCoat,
     name: "The north coat",
-    discountedPrice: 260,
-    originalPrice: 360,
+    discountPrice: 260,
+    price: 360,
     rating: 5,
     reviews: 65,
   },
   {
+    id: 2,
     image: DuffleBag,
     name: "Gucci duffle bag",
-    discountedPrice: 960,
-    originalPrice: 1160,
+    discountPrice: 960,
+    price: 1160,
     rating: 4.5,
     reviews: 65,
   },
   {
+    id: 3,
     image: CpuCooler,
     name: "RGB liquid CPU Cooler",
-    discountedPrice: 160,
-    originalPrice: 170,
+    discountPrice: 160,
+    price: 170,
     rating: 4.5,
     reviews: 65,
   },
   {
+    id: 4,
     image: SmallBookShelf,
     name: "Small Book Shelf",
-    discountedPrice: 360,
-    originalPrice: null,
+    discountPrice: 360,
+    price: null,
     rating: 5,
     reviews: 65,
   },
 ];
 export const ourproduct = [
   {
+    id: 1,
     name: "Breed Dry Dog Food",
-    price: "$100",
+    price: "100",
     rating: 35,
     isNew: false,
     image: BreedDryDogFood,
@@ -156,8 +172,9 @@ export const ourproduct = [
     reviews: 35,
   },
   {
+    id: 2,
     name: "CANON EOS DSLR Camera",
-    price: "$360",
+    price: "360",
     rating: 95,
     isNew: false,
     image: Camera,
@@ -165,8 +182,9 @@ export const ourproduct = [
     reviews: 95,
   },
   {
+    id: 3,
     name: "ASUS FHD Gaming Laptop",
-    price: "$700",
+    price: "700",
     rating: 325,
     isNew: false,
     image: Laptop,
@@ -174,8 +192,9 @@ export const ourproduct = [
     reviews: 325,
   },
   {
+    id: 4,
     name: "Curology Product Set",
-    price: "$500",
+    price: "500",
     rating: 145,
     isNew: false,
     image: Curology,
@@ -183,8 +202,9 @@ export const ourproduct = [
     reviews: 145,
   },
   {
+    id: 5,
     name: "Kids Electric Car",
-    price: "$960",
+    price: "960",
     rating: 65,
     isNew: true,
     image: ElectricCar,
@@ -192,8 +212,9 @@ export const ourproduct = [
     reviews: 65,
   },
   {
+    id: 6,
     name: "Jr. Zoom Soccer Cleats",
-    price: "$1160",
+    price: "1160",
     rating: 35,
     isNew: false,
     image: SoccerCleats,
@@ -201,8 +222,9 @@ export const ourproduct = [
     reviews: 35,
   },
   {
+    id: 7,
     name: "GP11 Shooter USB Gamepad",
-    price: "$660",
+    price: "660",
     rating: 55,
     isNew: true,
     image: GP11,
@@ -210,12 +232,78 @@ export const ourproduct = [
     reviews: 55,
   },
   {
+    id: 8,
     name: "Quilted Satin Jacket",
-    price: "$660",
+    price: "660",
     rating: 55,
     isNew: false,
     image: SatinJacket,
     rating: 4.5,
     reviews: 55,
+  },
+];
+export const wishlistProducts = [
+  {
+    id: 1,
+    name: "Gucci duffle bag",
+    discountPrice: 960,
+    price: 1160,
+    discount: "35%",
+    image: DuffleBag,
+  },
+  {
+    id: 2,
+    name: "RGB liquid CPU Cooler",
+    price: 1960,
+    image: CpuCooler,
+  },
+  {
+    id: 3,
+    name: "GP11 Shooter USB Gamepad",
+    price: 550,
+    image: GamePad,
+  },
+  {
+    id: 4,
+    name: "Quilted Satin Jacket",
+    price: 750,
+    image: SatinJacket,
+  },
+];
+
+export const recommendedProducts = [
+  {
+    id: 1,
+    name: "ASUS FHD Gaming Laptop",
+    discountPrice: 960,
+    price: 1160,
+    discount: "35%",
+    image: Laptop,
+    rating: 5,
+    reviews: 65,
+  },
+  {
+    id: 2,
+    name: "IPS LCD Gaming Monitor",
+    price: 1160,
+    image: Monitor,
+    rating: 5,
+    reviews: 65,
+  },
+  {
+    id: 3,
+    name: "HAVIT HV-G92 Gamepad",
+    price: 560,
+    image: GamePad,
+    rating: 5,
+    reviews: 65,
+  },
+  {
+    id: 4,
+    name: "AK-900 Wired Keyboard",
+    price: 200,
+    image: Keyboard,
+    rating: 5,
+    reviews: 65,
   },
 ];

@@ -5,7 +5,7 @@ import { bestproduct } from "../../../utils/data";
 
 const BestSelllingProduct = () => {
   return (
-    <div className="container mx-auto px-4 mb-[70px]">
+    <div className="container mx-auto px-4 pb-[70px]">
       <div className="space-y-4">
         <header className="">
           <div className="flex items-center gap-4 mt-6">

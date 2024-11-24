@@ -5,7 +5,7 @@ import Sidebar from "../../layout/Sidebar";
 
 const HeroSection = () => {
   return (
-    <div className="flex">
+    <div className="flex ">
       <Sidebar />
       <Banner />
     </div>

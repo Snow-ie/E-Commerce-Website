@@ -29,7 +29,7 @@ const FlashSale = () => {
     }
   };
   return (
-    <div className="container mx-auto px-4 py-[70] ">
+    <div className="container mx-auto px-4 py-[70px] ">
       <div className="lg:flex lg:items-end ">
         <header className="space-y-4 lg:w-1/4">
           <div className="flex items-center gap-4">
