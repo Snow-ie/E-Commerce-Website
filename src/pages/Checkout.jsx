@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Monitor from "../assets/images/Monitor.svg";
-import Gamepad from "../assets/images/Gamepad.svg";
+import Gamepad from "../assets/images/GamePad.svg";
 
 const Checkout = () => {
   const {
