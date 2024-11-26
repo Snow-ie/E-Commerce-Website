@@ -3,9 +3,10 @@ import FillLeftArrow from "../../../assets/FillLeftArrow";
 import FillRightArrow from "../../../assets/FillRightArrow";
 
 import ProductCard from "./ProductCard";
-import { products } from "../../../utils/data";
+import { flashSaleProducts } from "../../../utils/data";
 import CountdownTimer from "./CounterdownTimer";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const FlashSale = () => {
   const targetDate = new Date().getTime() + 4 * 24 * 60 * 60 * 1000;
@@ -53,19 +54,25 @@ const FlashSale = () => {
           </div>
         </div>
       </div>
-      <div
-        className="flex items-center gap-5 w-full mt-2 overflow-x-auto scrollbar scrollbar-h-1"
+      <ul
+        className="flex items-center gap-5  w-full mt-2 overflow-x-auto scrollbar scrollbar-h-1"
         ref={flashSaleRef}
       >
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {flashSaleProducts.map((product) => (
+          <li key={product.id}>
+            {" "}
+            <ProductCard product={product} />
+          </li>
         ))}
-      </div>
+      </ul>
       <div>
         <div className="flex items-start justify-center border-b">
-          <button className="text-center my-6 sm:mt-10 cursor-pointer bg-secondary1 text-primary h-[56px] py-1 px-4 sm:py-1 sm:px-5 rounded-md mb-3 text-sm sm:text-base">
+          <Link
+            className="text-center my-6 sm:mt-10 cursor-pointer bg-secondary1 text-primary h-[56px] py-1 px-4 sm:py-1 sm:px-5 rounded-md mb-3 text-sm sm:text-base flex items-center"
+            to="/products?timeline=today"
+          >
             View All Products
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
   const closeModal = () => setShowModal(false);
 
   return (
-    <div className="relative rounded-lg min-w-[350px] w-[350px]">
+    <div className="relative rounded-lg w-full">
       {discount > 0 && (
         <div className="absolute top-[12px] left-[12px] bg-secondary1 text-primary px-2 py-1 rounded-md text-sm font-normal">
           -{discount}%
@@ -71,13 +71,19 @@ const ProductCard = ({ product }) => {
           className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200 transition-colors duration-200"
           aria-label="Add to Wishlist"
         >
-          <FontAwesomeIcon icon={faHeart} className="text-gray-500" />
+          <FontAwesomeIcon
+            icon={faHeart}
+            className="text-gray-500 hover:text-hoverbutton"
+          />
         </button>
         <button
           className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200 transition-colors duration-200"
           aria-label="View Product"
         >
-          <FontAwesomeIcon icon={faEye} className="text-gray-500" />
+          <FontAwesomeIcon
+            icon={faEye}
+            className="text-gray-500 hover:text-hoverbutton"
+          />
         </button>
       </div>
 

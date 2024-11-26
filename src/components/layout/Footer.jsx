@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import GooglePlay from "../../assets/images/GooglePlay.svg";
 import Qrcode from "../../assets/images/Qrcode.svg";
 import AppStore from "../../assets/images/AppStore.svg";
@@ -7,6 +7,16 @@ import { footerLinks } from "../../utils/data";
 import SIcon from "../../assets/footer/SIcon";
 
 const Footer = () => {
+  const [isEmailActive, setIsEmailActive] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleFocus = () => setIsEmailActive(true);
+  const handleBlur = () => {
+    if (!email) setIsEmailActive(false);
+  };
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+
   return (
     <div className="pt-[80px]">
       <footer className="bg-primary2 text-primary">
@@ -17,13 +27,23 @@ const Footer = () => {
               <h4 className="text-2xl font-medium">Subscribe</h4>
               <p>Get 10% off your first order</p>
               <div className="flex items-center">
-                <div className="relative">
+                <div
+                  className={`relative ${
+                    isEmailActive ? "ring-2 ring-secondary1" : ""
+                  }`}
+                >
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="px-4 py-2 bg-primary2 text-primary rounded-lg border w-full"
+                    value={email}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    onChange={handleEmailChange}
+                    className={`px-4 py-2 bg-primary2 text-primary rounded-lg border w-full focus:outline-none ${
+                      isEmailActive ? "border-secondary1" : "border-gray-300"
+                    }`}
                   />
-                  <button className="absolute top-1/2 transform -translate-y-1/2 right-2 h-[24px] w-[24px]">
+                  <button className="absolute top-1/2 transform -translate-y-1/2 right-2 h-[24px] w-[24px] pr-3">
                     <SIcon />
                   </button>
                 </div>
@@ -36,7 +56,7 @@ const Footer = () => {
                 Email:{" "}
                 <a
                   href="mailto:exclusive@gmail.com"
-                  className="text-primary text-opacity-30"
+                  className="text-primary text-opacity-30 hover:text-secondary1"
                 >
                   exclusive@gmail.com
                 </a>
@@ -45,7 +65,7 @@ const Footer = () => {
                 Phone:{" "}
                 <a
                   href="tel:+8801588889999"
-                  className="text-primary text-opacity-30"
+                  className="text-primary text-opacity-30 hover:text-secondary1"
                 >
                   +88015-88888-9999
                 </a>
@@ -56,7 +76,9 @@ const Footer = () => {
               <ul className="space-y-2 text-base text-primary text-opacity-30">
                 {footerLinks.account.map((item, index) => (
                   <li key={index}>
-                    <a href={item.link}>{item.name}</a>
+                    <a href={item.link} className="hover:text-secondary1">
+                      {item.name}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -66,12 +88,13 @@ const Footer = () => {
               <ul className="space-y-2 text-base text-primary text-opacity-30">
                 {footerLinks.quickLinks.map((link, index) => (
                   <li key={index}>
-                    <a href={link.link}>{link.name}</a>
+                    <a href={link.link} className="hover:text-secondary1">
+                      {link.name}
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
-
             <div className="space-y-4">
               <h3 className="text-xl font-bold">Download App</h3>
               <p className="text-xs text-primary text-opacity-30">

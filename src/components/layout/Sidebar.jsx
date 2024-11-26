@@ -90,7 +90,7 @@ const Sidebar = () => {
             </button>
             {isWomensOpen && (
               <ul className="pl-4 mt-2 space-y-1">
-                <li className="hover:text-primary hover:text-opacity-60">
+                <li className="hover:text-secondary1 hover:text-opacity-40">
                   <a href="#">Dresses</a>
                 </li>
                 <li className="hover:text-secondary1 hover:text-opacity-40">

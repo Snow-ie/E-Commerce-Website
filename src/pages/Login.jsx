@@ -7,19 +7,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import useAuthContext from "../components/hooks/useAuthProvider";
 
-const Login = ({ setHasAccount }) => {
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
+
+const Login = () => {
   const [error, setError] = useState(null);
-  const { isAuth } = useAuthContext();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .email("Enter a valid email")
-      .required("Email is required"),
-    password: yup.string().required("Password is required"),
-  });
+  const { login } = useAuthContext();
 
   const {
     register,
@@ -29,25 +29,28 @@ const Login = ({ setHasAccount }) => {
     resolver: yupResolver(schema),
   });
 
-  const handleLogin = (data) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+  const handleLogin = ({ email, password }) => {
+    // const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    const user = users.find(
-      (user) => user.email === data.email && user.password === data.password
-    );
+    // const user = users.find(
+    //   (user) => user.email === data.email && user.password === data.password
+    // );
 
-    if (user) {
-      console.log("User logged in successfully:", user);
-      setHasAccount(true);
+    // if (user) {
+    // console.log("User logged in successfully:", user);
+    // setHasAccount(true);
+    if (email && password) {
+      login({ email, password });
       navigate("/account");
-    } else {
-      setError("Invalid email or password. Please try again.");
     }
+    // } else {
+    //   setError("Invalid email or password. Please try again.");
+    // }
   };
 
-  if (!isAuth) {
-    navigate("/");
-  }
+  // if (!isAuth) {
+  //   navigate("/");
+  // }
 
   return (
     <div className="bg-primary flex flex-col">
@@ -68,7 +71,7 @@ const Login = ({ setHasAccount }) => {
 
             {error && <p className="text-secondary1 mb-4">{error}</p>}
 
-            <form onSubmit={handleSubmit(handleLogin)}>
+            <form onSubmit={handleSubmit(handleLogin)} noValidate>
               <div className="mb-4">
                 <input
                   className="p-3 border-b border-button3 w-full"

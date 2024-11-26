@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import RectangleIcon from "../../assets/RectangleIcon";
 import FillLeftArrow from "../../assets/FillLeftArrow";
 import FillRightArrow from "../../assets/FillRightArrow";
@@ -54,19 +55,24 @@ const OurProducts = () => {
           </div>
         </header>
 
-        <div
+        <ul
           className="grid grid-cols-2 lg:grid-cols-4 gap-[30px] mt-2"
           ref={ourProductRef}
         >
           {ourproduct.map((details) => (
-            <OurProductCard key={details.id} details={details} />
+            <li key={details.id}>
+              <OurProductCard details={details} />
+            </li>
           ))}
-        </div>
+        </ul>
 
         <div className="flex justify-center mt-6 sm:mt-10">
-          <button className="bg-secondary1 text-primary py-3 px-6 rounded-md text-sm sm:text-base hover:bg-secondary2 transition">
+          <Link
+            className="bg-secondary1 text-primary py-3 px-6 rounded-md text-sm sm:text-base hover:bg-secondary2 transition flex items-center"
+            to="/products?timeline=ourproduct"
+          >
             View All Products
-          </button>
+          </Link>
         </div>
       </div>
     </div>

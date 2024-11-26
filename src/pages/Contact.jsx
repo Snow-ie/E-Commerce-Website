@@ -77,7 +77,7 @@ function Contact() {
           <div className="bg-white p-8 rounded-lg shadow-md w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:space-x-6">
-                <div className="flex-1 relative">
+                <div className="flex-1 relative mb-4">
                   <input
                     type="text"
                     id="name"
@@ -102,7 +102,7 @@ function Contact() {
                   )}
                 </div>
 
-                <div className="flex-1 relative">
+                <div className="flex-1 relative mb-4">
                   <input
                     type="email"
                     id="email"
@@ -127,7 +127,7 @@ function Contact() {
                   )}
                 </div>
 
-                <div className="flex-1 relative">
+                <div className="flex-1 relative mb-4">
                   <input
                     type="tel"
                     id="phone"

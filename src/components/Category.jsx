@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import RectangleIcon from "../assets/RectangleIcon";
 import FillRightArrow from "../assets/FillRightArrow";
 import FillLeftArrow from "../assets/FillLeftArrow";
@@ -6,25 +6,6 @@ import { categories } from "../utils/data";
 
 function Category() {
   const [selectedIndex, setSelectedIndex] = useState(3);
-  const categoryRef = useRef(null);
-
-  const scrollLeft = () => {
-    if (categoryRef.current) {
-      categoryRef.current.scrollBy({
-        left: -200,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (categoryRef.current) {
-      categoryRef.current.scrollBy({
-        left: 200,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <div className="container mx-auto px-4 pb-[70px]">
@@ -36,31 +17,11 @@ function Category() {
           </div>
           <h2 className="text-2xl font-bold">Browse By Category</h2>
         </header>
-        <div className="inline-flex items-center md:justify-end gap-4 lg:w-2/3">
-          <div className="flex">
-            <button
-              onClick={scrollLeft}
-              className="p-2 rounded-full hover:bg-gray-200 transition duration-300"
-            >
-              <FillLeftArrow />
-            </button>
-          </div>
-          <div className="flex">
-            <button
-              onClick={scrollRight}
-              className="p-2 rounded-full hover:bg-gray-200 transition duration-300"
-            >
-              <FillRightArrow />
-            </button>
-          </div>
-        </div>
+        <div className="inline-flex items-center md:justify-end gap-4 lg:w-2/3"></div>
       </div>
 
       <div className="border-b">
-        <div
-          className="flex items-center gap-[30px] w-full mt-2 overflow-x-auto scrollbar scrollbar-h-1 mb-6"
-          ref={categoryRef}
-        >
+        <div className="flex items-center gap-[30px] w-full mt-2 overflow-x-auto scrollbar scrollbar-h-1 mb-6">
           {categories.map((category, index) => (
             <div
               key={category.name}

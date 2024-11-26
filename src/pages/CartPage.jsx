@@ -40,37 +40,38 @@ const Cart = () => {
         </ol>
       </nav>
 
-      <div className="bg-white shadow-lg p-6 mb-8 rounded-lg">
-        <table className="w-full text-left">
-          <thead>
+      <div className="bg-white shadow-lg p-4 mb-6 rounded-lg">
+        <div className="hidden sm:table w-full text-left">
+          <thead className="border-b">
             <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-              <th>Action</th>
+              <th className="py-2 px-4">Product</th>
+              <th className="py-2 px-4">Price</th>
+              <th className="py-2 px-4">Quantity</th>
+              <th className="py-2 px-4">Subtotal</th>
+              <th className="py-2 px-4">Action</th>
             </tr>
           </thead>
           <tbody>
             {cartItems.map((item) => (
-              <tr key={item.id} className="border-t">
-                <td className="flex items-center py-4">
+              <tr key={item.id} className="border-b">
+                <td className="py-4 px-4 flex items-center">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-12 h-12 mr-4"
+                    className="w-12 h-12 object-cover mr-4"
                   />
                   {item.name}
                 </td>
-                <td>
+                <td className="py-4 px-4">
                   ${item?.discountPrice ? item.discountPrice : item?.price}
                 </td>
-                <td>
+                <td className="py-4 px-4">
                   <select
                     value={item.quantity}
                     onChange={(e) =>
                       handleUpdateQuantity(item.id, e.target.value)
                     }
+                    className="border rounded px-2 py-1 text-sm"
                   >
                     {[...Array(10).keys()].map((n) => (
                       <option key={n + 1} value={n + 1}>
@@ -79,12 +80,14 @@ const Cart = () => {
                     ))}
                   </select>
                 </td>
-                <td>
+                <td className="py-4 px-4">
                   $
-                  {(item?.discountPrice ? item.discountPrice : item?.price) *
-                    item.quantity}
+                  {(
+                    (item?.discountPrice ? item.discountPrice : item?.price) *
+                    item.quantity
+                  ).toFixed(2)}
                 </td>
-                <td>
+                <td className="py-4 px-4">
                   <button
                     onClick={() => handleRemove(item.id)}
                     className="text-red-500 hover:text-red-700"
@@ -95,8 +98,65 @@ const Cart = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </div>
+
+        <div className="sm:hidden space-y-6">
+          {cartItems.map((item) => (
+            <div
+              key={item.id}
+              className="border rounded-lg p-4 flex flex-col items-start justify-between"
+            >
+              <div className="flex items-start space-x-4">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-16 h-16 object-cover"
+                />
+                <div>
+                  <p className="font-medium text-sm">{item.name}</p>
+                  <p className="text-gray-600 text-sm">
+                    ${item?.discountPrice ? item.discountPrice : item?.price}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-4 flex items-center justify-between w-full">
+                <div>
+                  <label className="sr-only">Quantity</label>
+                  <select
+                    value={item.quantity}
+                    onChange={(e) =>
+                      handleUpdateQuantity(item.id, e.target.value)
+                    }
+                    className="border rounded px-2 py-1 text-sm"
+                  >
+                    {[...Array(10).keys()].map((n) => (
+                      <option key={n + 1} value={n + 1}>
+                        {n + 1}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <p className="text-sm font-medium">
+                    $
+                    {(
+                      (item?.discountPrice ? item.discountPrice : item?.price) *
+                      item.quantity
+                    ).toFixed(2)}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleRemove(item.id)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  <FontAwesomeIcon icon={faTrash} className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+
       <div className="flex justify-between items-center mb-8">
         <button className="border border-gray-400 px-4 py-2 rounded-lg">
           <a href="./" className="">

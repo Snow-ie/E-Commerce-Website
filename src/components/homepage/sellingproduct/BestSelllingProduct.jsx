@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import ProductsCard from "./ProductsCard";
 import RectangleIcon from "../../../assets/RectangleIcon";
 import { bestproduct } from "../../../utils/data";
@@ -17,18 +17,24 @@ const BestSelllingProduct = () => {
               Best Selling Products
             </h2>
             <div className="flex items-start justify-end">
-              <button className="text-center my-6 sm:mt-10 cursor-pointer bg-secondary1 text-primary h-[56px] py-1 px-4 sm:py-1 sm:px-5 rounded-md mb-3 text-sm sm:text-base">
+              <Link
+                className="text-center my-6 sm:mt-10 cursor-pointer bg-secondary1 text-primary h-[56px] py-1 px-4 sm:py-1 sm:px-5 rounded-md mb-3 text-sm sm:text-base flex items-center"
+                to="/products?timeline=thismonth"
+              >
                 View All Products
-              </button>
+              </Link>
             </div>
           </div>
         </header>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         {bestproduct.map((item) => (
-          <ProductsCard key={item.id} item={item} />
+          <li key={item.id}>
+            {" "}
+            <ProductsCard item={item} />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

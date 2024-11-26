@@ -3,7 +3,7 @@ import React from "react";
 const TeamMember = ({ name, title, img, socialLinks }) => {
   return (
     <div className="">
-      <div className="w-full h-[80%] bg-secondary4 flex items-center justify-center ">
+      <div className="w-full h-[80%] bg-secondary4 flex items-center justify-center transition-transform duration-300 transform hover:scale-105 ">
         <img src={img} alt={name} className="mt-auto h-3/4" />
       </div>
       <div className="">
@@ -16,7 +16,7 @@ const TeamMember = ({ name, title, img, socialLinks }) => {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-700 hover:text-gray-900"
+              className="text-gray-700 hover:text-hoverbutton"
             >
               {link.icon}
             </a>

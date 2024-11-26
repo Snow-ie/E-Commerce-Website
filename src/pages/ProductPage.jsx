@@ -67,8 +67,8 @@ const ProductPage = () => {
         <span className="text-black">Havic HV G-92 Gamepad</span>
       </div>
 
-      <div className="flex flex-col lg:flex-row mt-8">
-        <div className=" flex flex-col-reverse md:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row mt-8 gap-8">
+        <div className="flex flex-col-reverse md:flex-row gap-4">
           <div className="flex lg:flex-col space-x-2 lg:space-x-0 lg:gap-2 justify-between">
             {[Controller1, Controller2, Controller3, Controller4].map(
               (img, index) => (
@@ -76,7 +76,7 @@ const ProductPage = () => {
                   <img
                     src={img}
                     alt={`Product view ${index + 1}`}
-                    className="w-[80px] h-[80px] lg:w-[121px] lg:h-[114px] "
+                    className="w-[80px] h-[80px] lg:w-[121px] lg:h-[114px]"
                   />
                 </div>
               )
@@ -88,13 +88,13 @@ const ProductPage = () => {
               <img
                 src={MainProduct}
                 alt="Main Product"
-                className="w-full lg:h-[600px]"
+                className="w-full h-auto"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex-1 lg:pl-8 mt-8 lg:mt-0">
+        <div className="flex-1">
           <h1 className="text-2xl font-semibold">Havic HV G-92 Gamepad</h1>
           <div className="flex items-center my-2">
             {renderStars()}
@@ -112,20 +112,16 @@ const ProductPage = () => {
           <div className="mb-4">
             <h3 className="text-lg font-semibold">Colours:</h3>
             <div className="flex space-x-2">
-              <button
-                className={`w-6 h-6 rounded-full ${
-                  selectedColor === "white" ? "ring-2 ring-gray-500" : ""
-                }`}
-                style={{ backgroundColor: "white" }}
-                onClick={() => setSelectedColor("white")}
-              ></button>
-              <button
-                className={`w-6 h-6 rounded-full ${
-                  selectedColor === "black" ? "ring-2 ring-gray-500" : ""
-                }`}
-                style={{ backgroundColor: "black" }}
-                onClick={() => setSelectedColor("black")}
-              ></button>
+              {["white", "black"].map((color) => (
+                <button
+                  key={color}
+                  className={`w-6 h-6 rounded-full ${
+                    selectedColor === color ? "ring-2 ring-gray-500" : ""
+                  }`}
+                  style={{ backgroundColor: color }}
+                  onClick={() => setSelectedColor(color)}
+                ></button>
+              ))}
             </div>
           </div>
 
@@ -149,7 +145,7 @@ const ProductPage = () => {
           </div>
 
           <div className="flex items-center mb-6">
-            <div className="border">
+            <div className="border flex">
               <button
                 onClick={decreaseQuantity}
                 className="px-4 py-2 rounded-l hover:bg-hoverbutton"
@@ -172,15 +168,15 @@ const ProductPage = () => {
             </button>
           </div>
 
-          <div className="border px-4 w-[399px] h-[180px]">
-            <div className="flex items-center space-y-4 mb-4">
+          <div className="border p-4 w-full max-w-md">
+            <div className="flex sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-4">
               <DeliveryIcon />
               <div className="ml-4">
                 <h4 className="font-medium">Free Delivery</h4>
                 <p>Enter your postal code for Delivery Availability</p>
               </div>
             </div>
-            <div className="flex items-center border-t space-y-4">
+            <div className="flex items-center border-t pt-4">
               <ReturnIcon />
               <div className="ml-4">
                 <h4 className="font-medium">Return Delivery</h4>
@@ -195,15 +191,18 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
+
       <div className="flex items-center gap-6 mt-8">
         <RectangleIcon />
-        <h4 className="text-secondary1">Related Item</h4>
+        <h4 className="text-secondary1">Related Items</h4>
       </div>
-      <div className="flex items-center gap-5 w-full py-[70px] overflow-x-auto">
+      <ul className="flex items-center gap-5 w-full py-[70px] overflow-x-auto">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <li key={product.id} className="min-w-[200px] md:min-w-[350px]">
+            <ProductCard product={product} />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

@@ -24,6 +24,7 @@ import CartPage from "./pages/CartPage";
 import Account from "./pages/Account";
 import Checkout from "./pages/Checkout";
 import WishListPage from "./pages/WishListPage";
+import Products from "./pages/product/Products";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -69,6 +70,10 @@ function App() {
           element: <Checkout />,
         },
         {
+          path: "/products",
+          element: <Products />,
+        },
+        {
           element: isAuth ? <Navigate to="/" /> : <Outlet />,
           children: [
             {
@@ -79,7 +84,6 @@ function App() {
               path: "/login",
               element: <Login />,
             },
-            ,
           ],
         },
         {

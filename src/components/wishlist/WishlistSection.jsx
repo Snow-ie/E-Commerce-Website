@@ -5,13 +5,12 @@ import { addToCart } from "../../redux/cart/cartSlice";
 import { removeFromWishlist } from "../../redux/wishlist/wishlistSlice";
 import { toast } from "react-toastify";
 
-const ITEMS_PER_PAGE = 8; // Number of items per page
+const ITEMS_PER_PAGE = 8;
 
 const WishlistSection = ({ products }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Calculate paginated products
   const totalItems = products.length;
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const paginatedProducts = products.slice(
@@ -57,7 +56,6 @@ const WishlistSection = ({ products }) => {
         ))}
       </div>
 
-      {/* Pagination Controls */}
       <div className="flex justify-center items-center mt-6 space-x-4">
         <button
           onClick={handlePrevPage}

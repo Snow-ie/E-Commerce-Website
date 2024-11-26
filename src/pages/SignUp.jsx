@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useState } from "react";
 import BeatSnoop from "../assets/images/BeatSnoop.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -7,22 +6,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import useAuthContext from "../components/hooks/useAuthProvider";
 
-const SignUp = ({ setHasAccount }) => {
-  const { pathname } = useLocation();
-  const { isAuth } = useAuthContext();
-  const navigate = useNavigate();
+const schema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
+});
 
-  const schema = yup.object().shape({
-    name: yup.string().required("Name is required"),
-    email: yup
-      .string()
-      .email("Enter a valid email")
-      .required("Email is required"),
-    password: yup
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
-  });
+const SignUp = () => {
+  const [error, setError] = useState(null);
+  const { pathname } = useLocation();
+  const { signup } = useAuthContext();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -32,27 +32,16 @@ const SignUp = ({ setHasAccount }) => {
     resolver: yupResolver(schema),
   });
 
-  const handleSignUp = (data) => {
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-    const isUserExists = existingUsers.some(
-      (user) => user.email === data.email
-    );
-
-    if (isUserExists) {
-      alert("Email is already registered.");
-    } else {
-      existingUsers.push(data);
-      localStorage.setItem("users", JSON.stringify(existingUsers));
-      alert("Account created successfully!");
-      setHasAccount(true);
-      navigate("/login");
+  const handleSignUp = async ({ name, email, password }) => {
+    try {
+      if (name && email && password) {
+        await signup({ name, email, password }); // Ensure signup is async
+        navigate("/login");
+      }
+    } catch (err) {
+      setError("Failed to create account. Please try again.");
     }
   };
-
-  if (!isAuth) {
-    navigate("/");
-  }
 
   return (
     <div className="bg-primary flex flex-col">
@@ -119,6 +108,8 @@ const SignUp = ({ setHasAccount }) => {
               >
                 Create Account
               </button>
+
+              {error && <p className="text-secondary1 text-sm">{error}</p>}
             </form>
 
             <button className="border border-button3 py-3 rounded w-full flex items-center justify-center mb-4">
@@ -130,15 +121,10 @@ const SignUp = ({ setHasAccount }) => {
               Sign up with Google
             </button>
 
-            <div className="flex items-center justify-center gap-4 cursor-pointer">
+            <div className="flex items-center justify-center gap-4">
               <p className="text-sm">
-                <Link to="/login">Already have an account?</Link>{" "}
-                {pathname.includes("login")}
+                <Link to="/login">Already have an account? Log in</Link>
               </p>
-              <h4 onClick={() => setHasAccount(true)}>
-                <Link to="/login">Log in</Link>
-                {pathname.includes("login")}
-              </h4>
             </div>
           </div>
         </div>

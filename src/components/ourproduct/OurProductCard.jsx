@@ -55,7 +55,7 @@ const OurProductCard = ({ details }) => {
               <img
                 src={image}
                 alt={name}
-                className="size-full object-contain"
+                className="size-full object-contain transition-all duration-300 ease-in-out transform hover:scale-105"
               />
             </div>
             {hovered && (
@@ -75,13 +75,19 @@ const OurProductCard = ({ details }) => {
             className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200"
             aria-label="Add to Wishlist"
           >
-            <FontAwesomeIcon icon={faHeart} className="text-gray-500" />
+            <FontAwesomeIcon
+              icon={faHeart}
+              className="text-gray-500 hover:text-hoverbutton"
+            />
           </button>
           <button
             className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200"
             aria-label="View Product"
           >
-            <FontAwesomeIcon icon={faEye} className="text-gray-500" />
+            <FontAwesomeIcon
+              icon={faEye}
+              className="text-gray-500 hover:text-hoverbutton"
+            />
           </button>
         </div>
 
