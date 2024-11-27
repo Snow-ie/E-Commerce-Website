@@ -13,9 +13,9 @@ const ArrowRightIcon = () => {
         <path
           d="M3.5 12H20M20 12L13 5M20 12L13 19"
           stroke="#FAFAFA"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>

@@ -41,7 +41,7 @@ const Cart = () => {
       </nav>
 
       <div className="bg-white shadow-lg p-4 mb-6 rounded-lg">
-        <div className="hidden sm:table w-full text-left">
+        <table className="hidden sm:table w-full text-left">
           <thead className="border-b">
             <tr>
               <th className="py-2 px-4">Product</th>
@@ -98,7 +98,7 @@ const Cart = () => {
               </tr>
             ))}
           </tbody>
-        </div>
+        </table>
 
         <div className="sm:hidden space-y-6">
           {cartItems.map((item) => (

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { products } from "../../utils/data";
 import ProductCard from "../../components/homepage/flashcard/ProductCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -10,6 +11,10 @@ const Products = () => {
   const [availability, setAvailability] = useState("all");
   const [rating, setRating] = useState("all");
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [selectedCategory, priceRange, availability, rating]);
 
   const filteredProducts = products.filter((product) => {
     let matchesCategory =
@@ -33,6 +38,18 @@ const Products = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <nav className="mb-6">
+        <ul className="flex space-x-2 text-gray-500 text-sm">
+          <li>
+            <Link to="/" className="hover:underline">
+              Home
+            </Link>
+          </li>
+          <li>/</li>
+          <li className="text-gray-700 font-medium">Products</li>
+        </ul>
+      </nav>
+
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl sm:text-3xl font-bold">All Products</h2>
         <button

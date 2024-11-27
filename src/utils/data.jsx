@@ -124,7 +124,7 @@ export const flashSaleProducts = [
 
 export const bestproduct = [
   {
-    id: 1,
+    id: 5,
     image: NorthCoat,
     name: "The north coat",
     discountPrice: 260,
@@ -133,7 +133,7 @@ export const bestproduct = [
     reviews: 65,
   },
   {
-    id: 2,
+    id: 6,
     image: DuffleBag,
     name: "Gucci duffle bag",
     discountPrice: 960,
@@ -142,7 +142,7 @@ export const bestproduct = [
     reviews: 65,
   },
   {
-    id: 3,
+    id: 7,
     image: CpuCooler,
     name: "RGB liquid CPU Cooler",
     discountPrice: 160,
@@ -151,7 +151,7 @@ export const bestproduct = [
     reviews: 65,
   },
   {
-    id: 4,
+    id: 8,
     image: SmallBookShelf,
     name: "Small Book Shelf",
     discountPrice: 360,
@@ -162,7 +162,7 @@ export const bestproduct = [
 ];
 export const ourproduct = [
   {
-    id: 1,
+    id: 9,
     name: "Breed Dry Dog Food",
     price: "100",
     rating: 35,
@@ -172,7 +172,7 @@ export const ourproduct = [
     reviews: 35,
   },
   {
-    id: 2,
+    id: 10,
     name: "CANON EOS DSLR Camera",
     price: "360",
     rating: 95,
@@ -182,7 +182,7 @@ export const ourproduct = [
     reviews: 95,
   },
   {
-    id: 3,
+    id: 11,
     name: "ASUS FHD Gaming Laptop",
     price: "700",
     rating: 325,
@@ -192,7 +192,7 @@ export const ourproduct = [
     reviews: 325,
   },
   {
-    id: 4,
+    id: 12,
     name: "Curology Product Set",
     price: "500",
     rating: 145,
@@ -202,7 +202,7 @@ export const ourproduct = [
     reviews: 145,
   },
   {
-    id: 5,
+    id: 13,
     name: "Kids Electric Car",
     price: "960",
     rating: 65,
@@ -212,7 +212,7 @@ export const ourproduct = [
     reviews: 65,
   },
   {
-    id: 6,
+    id: 14,
     name: "Jr. Zoom Soccer Cleats",
     price: "1160",
     rating: 35,
@@ -222,7 +222,7 @@ export const ourproduct = [
     reviews: 35,
   },
   {
-    id: 7,
+    id: 15,
     name: "GP11 Shooter USB Gamepad",
     price: "660",
     rating: 55,
@@ -232,7 +232,7 @@ export const ourproduct = [
     reviews: 55,
   },
   {
-    id: 8,
+    id: 16,
     name: "Quilted Satin Jacket",
     price: "660",
     rating: 55,

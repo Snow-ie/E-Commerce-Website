@@ -1,12 +1,12 @@
 import {
-  BrowserRouter,
-  Routes,
-  Route,
   RouterProvider,
   createBrowserRouter,
   Navigate,
   Outlet,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SignUp from "./pages/SignUp";
@@ -19,15 +19,12 @@ import useAuthContext, {
 import Layout from "./components/layout/Layout";
 import Contact from "./pages/Contact";
 import ProductPage from "./pages/ProductPage";
-
 import CartPage from "./pages/CartPage";
 import Account from "./pages/Account";
 import Checkout from "./pages/Checkout";
 import WishListPage from "./pages/WishListPage";
 import Products from "./pages/product/Products";
-
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ProductDetails from "./pages/product/ProductDetails";
 
 function App() {
   const { isAuth } = useAuthContext();
@@ -74,7 +71,11 @@ function App() {
           element: <Products />,
         },
         {
-          element: isAuth ? <Navigate to="/" /> : <Outlet />,
+          path: "/details/:id",
+          element: <ProductDetails />,
+        },
+        {
+          element: isAuth ? <Navigate to="/" replace /> : <Outlet />,
           children: [
             {
               path: "/signup",
@@ -96,7 +97,6 @@ function App() {
 
   return (
     <AuthProvider>
-      {" "}
       <RouterProvider router={router} />
       <ToastContainer />
     </AuthProvider>

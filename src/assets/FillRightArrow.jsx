@@ -14,9 +14,9 @@ const FillRightArrow = () => {
         <path
           d="M14.5 23H31M31 23L24 16M31 23L24 30"
           stroke="black"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import {
   faHeart,
   faEye,
@@ -18,10 +19,7 @@ const OurProductCard = ({ details }) => {
   const dispatch = useDispatch();
   const [hovered, setHovered] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 >= 0.5;
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
   const handleAddToCart = (product) => {
     toast.success("Item added to cart!");
@@ -30,101 +28,114 @@ const OurProductCard = ({ details }) => {
   };
 
   const handleAddToWishlist = (product) => {
-    toast.success("Item added to wishlist!");
-    dispatch(addToWishlist(product));
+    if (isWishlisted) {
+      toast.info("Item removed from wishlist!");
+    } else {
+      toast.success("Item added to wishlist!");
+      dispatch(addToWishlist(product));
+    }
+    setIsWishlisted((prev) => !prev);
   };
 
   const closeModal = () => setShowModal(false);
 
-  return (
-    <div>
-      <div className="relative rounded-lg">
-        {isNew && (
-          <div className="absolute top-[12px] left-[12px] z-10 bg-button1 text-primary px-2 py-1 rounded-md text-sm font-normal">
-            New
-          </div>
+  const renderRating = () => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    return (
+      <>
+        {[...Array(fullStars)].map((_, i) => (
+          <FontAwesomeIcon
+            key={`full-${i}`}
+            icon={faStar}
+            className="text-secondary2"
+          />
+        ))}
+        {hasHalfStar && (
+          <FontAwesomeIcon icon={faStarHalfAlt} className="text-secondary2" />
         )}
+        {[...Array(emptyStars)].map((_, i) => (
+          <FontAwesomeIcon
+            key={`empty-${i}`}
+            icon={faStar}
+            className="text-gray-300"
+          />
+        ))}
+      </>
+    );
+  };
 
-        <div className="bg-secondary flex flex-col h-[220px]">
-          <div
-            className="relative inline-block cursor-pointer"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            <div className="p-4 h-[180px]">
-              <img
-                src={image}
-                alt={name}
-                className="size-full object-contain transition-all duration-300 ease-in-out transform hover:scale-105"
-              />
-            </div>
-            {hovered && (
-              <button
-                onClick={() => handleAddToCart(details)}
-                className="absolute w-full h-[41px] bg-primary2 text-primary text-center py-2 px-4 rounded"
-              >
-                Add to Cart
-              </button>
-            )}
-          </div>
+  return (
+    <div className="relative rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
+      {isNew && (
+        <div className="absolute top-[12px] left-[12px] z-10 bg-button1 text-primary px-2 py-1 rounded-md text-sm font-normal">
+          New
         </div>
+      )}
 
-        <div className="absolute top-[5px] right-[5px] flex flex-col space-y-2">
+      <div
+        className="bg-secondary flex flex-col h-[220px] rounded-t-lg overflow-hidden relative"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <Link
+          to={{
+            pathname: `/details/${details.id}`,
+            state: { name: details.name, image: details.image },
+          }}
+          className="p-4 h-[180px]"
+        >
+          <img
+            src={image}
+            alt={name}
+            className="size-full object-contain transition-transform duration-300 ease-in-out transform hover:scale-105"
+          />
+        </Link>
+        {hovered && (
           <button
-            onClick={() => handleAddToWishlist(details)}
-            className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200"
-            aria-label="Add to Wishlist"
+            onClick={() => handleAddToCart(details)}
+            className="absolute bottom-0 w-full h-[41px] bg-primary2 text-primary text-center py-2 rounded-b-lg transition-all duration-300"
           >
-            <FontAwesomeIcon
-              icon={faHeart}
-              className="text-gray-500 hover:text-hoverbutton"
-            />
+            Add to Cart
           </button>
-          <button
-            className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200"
-            aria-label="View Product"
-          >
-            <FontAwesomeIcon
-              icon={faEye}
-              className="text-gray-500 hover:text-hoverbutton"
-            />
-          </button>
-        </div>
+        )}
+      </div>
 
-        <div className="mt-4">
-          <h3 className="text-base font-normal">{name}</h3>
+      <div className="absolute top-[5px] right-[5px] flex flex-col space-y-2">
+        <button
+          onClick={() => handleAddToWishlist(details)}
+          className={`rounded-full shadow w-[34px] h-[34px] transition-colors ${
+            isWishlisted ? "bg-black text-white" : "bg-white text-gray-500"
+          }`}
+          aria-label="Add to Wishlist"
+        >
+          <FontAwesomeIcon
+            icon={faHeart}
+            className={`transition-colors ${
+              isWishlisted ? "text-white" : "hover:text-hoverbutton"
+            }`}
+          />
+        </button>
+        <button
+          className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200 transition-colors duration-200"
+          aria-label="View Product"
+        >
+          <FontAwesomeIcon
+            icon={faEye}
+            className="text-gray-500 hover:text-hoverbutton"
+          />
+        </button>
+      </div>
 
-          <div className="mt-2 flex items-center gap-4">
-            <span className="text-secondary1 text-base font-normal">
-              ${price}
-            </span>
-
-            <div className="flex items-center text-secondary2">
-              {[...Array(fullStars)].map((_, i) => (
-                <FontAwesomeIcon
-                  key={`full-${i}`}
-                  icon={faStar}
-                  className="text-secondary2"
-                />
-              ))}
-
-              {hasHalfStar && (
-                <FontAwesomeIcon
-                  icon={faStarHalfAlt}
-                  className="text-secondary2"
-                />
-              )}
-
-              {[...Array(emptyStars)].map((_, i) => (
-                <FontAwesomeIcon
-                  key={`empty-${i}`}
-                  icon={faStar}
-                  className="text-gray-300"
-                />
-              ))}
-
-              <span className="ml-2 text-gray-500 text-sm">({reviews})</span>
-            </div>
+      <div className="p-4">
+        <h3 className="text-base font-medium text-gray-800">{name}</h3>
+        <div className="mt-2 flex items-center gap-4">
+          <span className="text-secondary1 text-base font-bold">${price}</span>
+          <div className="flex items-center text-secondary2">
+            {renderRating()}
+            <span className="ml-2 text-gray-500 text-sm">({reviews})</span>
           </div>
         </div>
       </div>

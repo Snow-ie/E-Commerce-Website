@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -21,6 +22,7 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const [hovered, setHovered] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
   const handleAddToCart = (product) => {
     toast.success("Item added to cart successfully!");
@@ -28,9 +30,14 @@ const ProductCard = ({ product }) => {
     setShowModal(true);
   };
 
-  const handleAddToWishlist = (product) => {
-    toast.success("Item added to wishlist!");
-    dispatch(addToWishlist(product));
+  const handleWishlistClick = (product) => {
+    if (isWishlisted) {
+      toast.info("Item removed from wishlist!");
+    } else {
+      toast.success("Item added to wishlist!");
+      dispatch(addToWishlist(product));
+    }
+    setIsWishlisted((prev) => !prev);
   };
 
   const closeModal = () => setShowModal(false);
@@ -48,13 +55,19 @@ const ProductCard = ({ product }) => {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <div className="p-4 transition-transform duration-300 transform hover:scale-105">
+        <Link
+          className="p-4 transition-transform duration-300 transform hover:scale-105"
+          to={{
+            pathname: `/details/${product.id}`,
+            state: { name: product.name, image: product.image },
+          }}
+        >
           <img
             src={image}
             alt={name}
             className="w-full h-[180px] object-contain"
           />
-        </div>
+        </Link>
         {hovered && (
           <button
             onClick={() => handleAddToCart(product)}
@@ -67,13 +80,17 @@ const ProductCard = ({ product }) => {
 
       <div className="absolute top-[5px] right-[5px] flex flex-col space-y-2">
         <button
-          onClick={() => handleAddToWishlist(product)}
-          className="bg-white rounded-full shadow w-[34px] h-[34px] hover:bg-gray-200 transition-colors duration-200"
+          onClick={() => handleWishlistClick(product)}
+          className={`rounded-full shadow w-[34px] h-[34px] transition-colors duration-200 ${
+            isWishlisted ? "bg-black text-white" : "bg-white text-gray-500"
+          }`}
           aria-label="Add to Wishlist"
         >
           <FontAwesomeIcon
             icon={faHeart}
-            className="text-gray-500 hover:text-hoverbutton"
+            className={`transition-colors duration-200 ${
+              isWishlisted ? "text-white" : "hover:text-hoverbutton"
+            }`}
           />
         </button>
         <button
@@ -90,11 +107,20 @@ const ProductCard = ({ product }) => {
       <div className="p-4">
         <h3 className="text-base font-medium">{name}</h3>
         <div className="mt-2 flex items-center space-x-4">
-          <span className="text-secondary1 text-base font-bold">
-            ${discountPrice}
-          </span>
-          <span className="text-gray-400 line-through">${price}</span>
+          {discountPrice ? (
+            <>
+              <span className="text-secondary1 text-base font-bold">
+                ${discountPrice}
+              </span>
+              <span className="text-gray-400 line-through">${price}</span>
+            </>
+          ) : (
+            <span className="text-secondary1 text-base font-bold">
+              ${price}
+            </span>
+          )}
         </div>
+
         <div className="mt-2 flex items-center text-secondary2">
           {[...Array(5)].map((_, i) => {
             if (i < Math.floor(rating)) {
