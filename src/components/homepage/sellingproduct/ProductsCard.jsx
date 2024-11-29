@@ -12,7 +12,7 @@ import { addToWishlist } from "../../../redux/wishlist/wishlistSlice";
 import { toast } from "react-toastify";
 
 const ProductsCard = ({ item }) => {
-  const { image, price, discountPrice, rating, reviews, name } = item;
+  const { id, image, price, discountPrice, rating, reviews, name } = item;
 
   const dispatch = useDispatch();
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -32,14 +32,15 @@ const ProductsCard = ({ item }) => {
       <div className="bg-secondary flex flex-col gap-4 h-[250px] rounded-t-lg overflow-hidden">
         <Link
           to={{
-            pathname: `/details/${item.id}`,
-            state: { name: item.name, image: item.image },
+            pathname: `/details/${id}`,
+            state: { name, image },
           }}
-          className="p-4"
+          className="block"
         >
           <img
             src={image}
             alt={name}
+            loading="lazy"
             className="w-full h-[180px] object-contain transition-transform duration-300 transform hover:scale-105"
           />
         </Link>
@@ -88,7 +89,6 @@ const ProductsCard = ({ item }) => {
           )}
         </div>
 
-        {/* Rating Section */}
         <div className="mt-2 flex items-center text-secondary2">
           {[...Array(5)].map((_, i) => {
             if (i < Math.floor(rating)) {

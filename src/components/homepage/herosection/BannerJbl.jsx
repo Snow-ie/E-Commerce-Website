@@ -67,6 +67,7 @@ const BannerJbl = () => {
           <img
             src={Jbl}
             alt="Music Speaker"
+            loading="lazy"
             className="w-3/4 lg:w-full object-contain animate-bounce-slow"
           />
         </div>

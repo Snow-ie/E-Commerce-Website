@@ -90,6 +90,7 @@ const ProductPage = () => {
                   <img
                     src={img}
                     alt={`Product view ${index + 1}`}
+                    loading="lazy"
                     className="w-[80px] h-[80px] lg:w-[121px] lg:h-[114px]"
                   />
                 </div>

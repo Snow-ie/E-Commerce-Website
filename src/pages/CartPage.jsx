@@ -58,6 +58,7 @@ const Cart = () => {
                   <img
                     src={item.image}
                     alt={item.name}
+                    loading="lazy"
                     className="w-12 h-12 object-cover mr-4"
                   />
                   {item.name}
@@ -110,6 +111,7 @@ const Cart = () => {
                 <img
                   src={item.image}
                   alt={item.name}
+                  loading="lazy"
                   className="w-16 h-16 object-cover"
                 />
                 <div>

@@ -60,6 +60,7 @@ const Banner = () => {
           >
             <img
               src={Iphone}
+              loading="lazy"
               alt="iPhone 14"
               className="w-3/4 md:w-full object-contain"
             />

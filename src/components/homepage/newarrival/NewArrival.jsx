@@ -24,6 +24,7 @@ const NewArrival = () => {
           <img
             src={PlayStation}
             alt="PlayStation 5"
+            loading="lazy"
             className="absolute inset-0 w-[511px] h-[511px] object-cover opacity-70 transition-transform duration-500 transform hover:scale-110"
           />
           <div className="relative p-6">
@@ -44,6 +45,7 @@ const NewArrival = () => {
             <img
               src={WomenWear}
               alt="Women's Collections"
+              loading="lazy"
               className="absolute inset-0 w-full h-[286px] object-cover opacity-70 transition-transform duration-500 transform hover:scale-110"
             />
             <div className="relative p-6 text-white">
@@ -64,6 +66,7 @@ const NewArrival = () => {
               <img
                 src={Speaker}
                 alt="Speakers"
+                loading="lazy"
                 className="absolute inset-0 w-[190px] h-[221px] object-cover opacity-70 transition-transform duration-500 transform hover:scale-110"
               />
               <div className="relative p-4 text-white">
@@ -82,6 +85,7 @@ const NewArrival = () => {
                 <img
                   src={Perfume}
                   alt="Perfume"
+                  loading="lazy"
                   className="absolute inset-2 w-[201px] h-[203px] object-cover opacity-70 transition-transform duration-500 transform hover:scale-110"
                 />
                 <div className="relative p-4 text-white">

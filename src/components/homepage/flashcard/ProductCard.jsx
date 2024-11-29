@@ -65,6 +65,7 @@ const ProductCard = ({ product }) => {
           <img
             src={image}
             alt={name}
+            loading="lazy"
             className="w-full h-[180px] object-contain"
           />
         </Link>

@@ -39,6 +39,7 @@ const About = () => {
           <img
             src={TwoAfrican}
             alt="Our Story"
+            loading="lazy"
             className="w-full h-auto rounded-lg"
           />
         </div>

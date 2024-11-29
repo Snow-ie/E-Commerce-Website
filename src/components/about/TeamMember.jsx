@@ -4,7 +4,7 @@ const TeamMember = ({ name, title, img, socialLinks }) => {
   return (
     <div className="">
       <div className="w-full h-[80%] bg-secondary4 flex items-center justify-center transition-transform duration-300 transform hover:scale-105 ">
-        <img src={img} alt={name} className="mt-auto h-3/4" />
+        <img src={img} alt={name} loading="lazy" className="mt-auto h-3/4" />
       </div>
       <div className="">
         <h2 className="mt-4 text-lg font-medium lg:text-2xl">{name}</h2>

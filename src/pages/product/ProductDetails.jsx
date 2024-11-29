@@ -94,6 +94,7 @@ const ProductDetails = () => {
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
             className="w-full h-full object-contain border border-gray-300 rounded-lg"
           />
         </div>

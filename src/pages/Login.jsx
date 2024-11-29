@@ -59,6 +59,7 @@ const Login = () => {
           <img
             src={BeatSnoop}
             alt="Shopping cart and smartphone"
+            loading="lazy"
             className="object-contain max-h-full w-full"
           />
         </div>

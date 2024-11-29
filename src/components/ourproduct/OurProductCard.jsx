@@ -90,6 +90,7 @@ const OurProductCard = ({ details }) => {
           <img
             src={image}
             alt={name}
+            loading="lazy"
             className="size-full object-contain transition-transform duration-300 ease-in-out transform hover:scale-105"
           />
         </Link>
@@ -130,13 +131,15 @@ const OurProductCard = ({ details }) => {
       </div>
 
       <div className="p-4">
-        <h3 className="text-base font-medium text-gray-800">{name}</h3>
-        <div className="mt-2 flex items-center gap-4">
+        <h3 className="text-base text-wrap font-medium text-gray-800">
+          {name}
+        </h3>
+        <div className="mt-2 flex items-center">
           <span className="text-secondary1 text-base font-bold">${price}</span>
-          <div className="flex items-center text-secondary2">
-            {renderRating()}
-            <span className="ml-2 text-gray-500 text-sm">({reviews})</span>
-          </div>
+        </div>
+        <div className="flex items-center text-secondary2">
+          {renderRating()}
+          <span className="ml-2 text-gray-500 text-sm">({reviews})</span>
         </div>
       </div>
 
