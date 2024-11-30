@@ -86,7 +86,6 @@ const Navbar = () => {
         </svg>
       </button>
 
-      {/* Navigation Links */}
       <ul
         className={`${
           isOpen ? "block" : "hidden"
@@ -94,32 +93,70 @@ const Navbar = () => {
         id="navbar-default"
       >
         <li>
-          <Link to="/" className="block py-2 lg:py-0">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `block py-2 lg:py-0 border-b-2 ${
+                isActive
+                  ? "border-secondary1 text-secondary1"
+                  : "border-transparent"
+              } hover:border-secondary1 hover:text-secondary1 transition duration-200`
+            }
+            onClick={() => setIsOpen(false)}
+          >
             Home
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/contact" className="block py-2 lg:py-0">
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `block py-2 lg:py-0 border-b-2 ${
+                isActive
+                  ? "border-secondary1 text-secondary1"
+                  : "border-transparent"
+              } hover:border-secondary1 hover:text-secondary1 transition duration-200`
+            }
+            onClick={() => setIsOpen(false)}
+          >
             Contact
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/about" className="block py-2 lg:py-0">
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `block py-2 lg:py-0 border-b-2 ${
+                isActive
+                  ? "border-secondary1 text-secondary1"
+                  : "border-transparent"
+              } hover:border-secondary1 hover:text-secondary1 transition duration-200`
+            }
+            onClick={() => setIsOpen(false)}
+          >
             About
-          </Link>
+          </NavLink>
         </li>
         {!isAuth && (
           <li>
-            <Link to="/signup" className="block py-2 lg:py-0">
+            <NavLink
+              to="/signup"
+              className={({ isActive }) =>
+                `block py-2 lg:py-0 border-b-2 ${
+                  isActive
+                    ? "border-secondary1 text-secondary1"
+                    : "border-transparent"
+                } hover:border-secondary1 hover:text-secondary1 transition duration-200`
+              }
+              onClick={() => setIsOpen(false)}
+            >
               Sign Up
-            </Link>
+            </NavLink>
           </li>
         )}
       </ul>
 
-      {/* Right Section */}
       <div className="hidden lg:flex items-center space-x-4">
-        {/* Search */}
         <div className="relative">
           <input
             type="text"
@@ -140,7 +177,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Icons */}
         {!isAuthRoute && (
           <div className="space-x-2 flex">
             <Link
@@ -166,7 +202,6 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* User Dropdown */}
         {isAuth && (
           <div className="relative" ref={dropdownRef}>
             <button
