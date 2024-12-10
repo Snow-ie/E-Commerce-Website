@@ -17,7 +17,7 @@ import { selectWishlistCount } from "../../redux/wishlist/wishlistSlice";
 const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { isAuth, logout } = useAuthContext();
+  const { isAuth, isAdmin, logout } = useAuthContext();
   const cartCount = useSelector(selectCartCount);
   const wishlistCount = useSelector(selectWishlistCount);
 
@@ -62,7 +62,6 @@ const Navbar = () => {
         <LogoIcon aria-label="Logo" />
       </Link>
 
-      {/* Hamburger Menu */}
       <button
         onClick={toggleMenu}
         className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -92,51 +91,29 @@ const Navbar = () => {
         } lg:flex lg:space-x-8 absolute lg:static top-16 left-0 w-full bg-primary lg:w-auto z-10 p-4 lg:p-0`}
         id="navbar-default"
       >
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `block py-2 lg:py-0 border-b-2 ${
-                isActive
-                  ? "border-secondary1 text-secondary1"
-                  : "border-transparent"
-              } hover:border-secondary1 hover:text-secondary1 transition duration-200`
-            }
-            onClick={() => setIsOpen(false)}
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `block py-2 lg:py-0 border-b-2 ${
-                isActive
-                  ? "border-secondary1 text-secondary1"
-                  : "border-transparent"
-              } hover:border-secondary1 hover:text-secondary1 transition duration-200`
-            }
-            onClick={() => setIsOpen(false)}
-          >
-            Contact
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              `block py-2 lg:py-0 border-b-2 ${
-                isActive
-                  ? "border-secondary1 text-secondary1"
-                  : "border-transparent"
-              } hover:border-secondary1 hover:text-secondary1 transition duration-200`
-            }
-            onClick={() => setIsOpen(false)}
-          >
-            About
-          </NavLink>
-        </li>
+        {[
+          { path: "/", label: "Home" },
+          { path: "/contact", label: "Contact" },
+          { path: "/about", label: "About" },
+          { path: "/vendor/addvendor", label: "Become a Vendor" },
+        ].map(({ path, label }) => (
+          <li key={path}>
+            <NavLink
+              to={path}
+              className={({ isActive }) =>
+                `block py-2 lg:py-0 border-b-2 ${
+                  isActive
+                    ? "border-secondary1 text-secondary1"
+                    : "border-transparent"
+                } hover:border-secondary1 hover:text-secondary1 transition duration-200`
+              }
+              onClick={() => setIsOpen(false)}
+            >
+              {label}
+            </NavLink>
+          </li>
+        ))}
+
         {!isAuth && (
           <li>
             <NavLink
@@ -163,7 +140,7 @@ const Navbar = () => {
             value={searchText}
             onChange={handleInputChange}
             placeholder="What are you looking for?"
-            className={`block px-4 py-2 pl-4 border rounded w-[243px] ${
+            className={`block px-4 py-2 border rounded w-[243px] ${
               searchText ? "border-secondary1" : "border-gray-300"
             } focus:ring focus:ring-blue-200 focus:outline-none`}
           />
@@ -215,59 +192,44 @@ const Navbar = () => {
               <UserIcon />
             </button>
             {isDropdownOpen && (
-              <div className="absolute right-5 mt-2 w-[225px] bg-black text-white rounded-lg p-2 z-50">
-                <NavLink
-                  to="/account"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-2 px-4 py-2 rounded ${
-                      isActive
-                        ? "bg-secondary1 text-white"
-                        : "hover:bg-hoverbutton"
-                    }`
-                  }
-                >
-                  <UserIcon />
-                  <span>Manage My Account</span>
-                </NavLink>
-                <NavLink
-                  to="/orders"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-2 px-4 py-2 rounded ${
-                      isActive
-                        ? "bg-secondary1 text-white"
-                        : "hover:bg-hoverbutton"
-                    }`
-                  }
-                >
-                  <MallbagIcon />
-                  <span>My Orders</span>
-                </NavLink>
-                <NavLink
-                  to="/cancellations"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-2 px-4 py-2 rounded ${
-                      isActive
-                        ? "bg-secondary1 text-white"
-                        : "hover:bg-hoverbutton"
-                    }`
-                  }
-                >
-                  <CancelIcon />
-                  <span>My Cancellations</span>
-                </NavLink>
-                <NavLink
-                  to="/reviews"
-                  className={({ isActive }) =>
-                    `flex items-center space-x-2 px-4 py-2 rounded ${
-                      isActive
-                        ? "bg-secondary1 text-white"
-                        : "hover:bg-hoverbutton"
-                    }`
-                  }
-                >
-                  <ReviewsIcon />
-                  <span>My Reviews</span>
-                </NavLink>
+              <div className="absolute right-0 mt-2 w-56 bg-black text-white rounded-lg p-2 z-50">
+                {[
+                  {
+                    path: "/account",
+                    label: "Manage My Account",
+                    icon: <UserIcon />,
+                  },
+                  {
+                    path: "/orders",
+                    label: "My Orders",
+                    icon: <MallbagIcon />,
+                  },
+                  {
+                    path: "/cancellations",
+                    label: "My Cancellations",
+                    icon: <CancelIcon />,
+                  },
+                  {
+                    path: "/reviews",
+                    label: "My Reviews",
+                    icon: <ReviewsIcon />,
+                  },
+                ].map(({ path, label, icon }) => (
+                  <NavLink
+                    to={path}
+                    key={path}
+                    className={({ isActive }) =>
+                      `flex items-center space-x-2 px-4 py-2 rounded ${
+                        isActive
+                          ? "bg-secondary1 text-white"
+                          : "hover:bg-hoverbutton"
+                      }`
+                    }
+                  >
+                    {icon}
+                    <span>{label}</span>
+                  </NavLink>
+                ))}
                 <button
                   onClick={handleLogout}
                   className="flex items-center w-full space-x-2 px-4 py-2 hover:bg-hoverbutton rounded"

@@ -25,9 +25,20 @@ import Checkout from "./pages/Checkout";
 import WishListPage from "./pages/WishListPage";
 import Products from "./pages/product/Products";
 import ProductDetails from "./pages/product/ProductDetails";
+import AdminPage from "./pages/admin/AdminPage";
+import AdminProduct from "./components/admin/AdminProduct";
+import VendorTable from "./components/vendor/VendorTable";
+import AddVendor from "./components/vendor/AddVendor";
+import VendorAddress from "./components/vendor/VendorAddress";
+import VendorPaymentOptions from "./components/vendor/VendorPaymentOptions";
+import VendorProduct from "./components/vendor/VendorProduct";
+import VendorSignInPages from "./pages/VendorSignInPages";
+import VendorPages from "./pages/VendorPages";
+import VendorAddProduct from "./components/vendorpage/VendorAddProduct";
+import VendorEditProduct from "./components/vendorpage/VendorEditProduct";
 
 function App() {
-  const { isAuth } = useAuthContext();
+  const { isAuth, isAdmin } = useAuthContext();
 
   const router = createBrowserRouter([
     {
@@ -87,11 +98,51 @@ function App() {
             },
           ],
         },
+      ],
+    },
+
+    {
+      path: "/admin",
+      element: <AdminPage />,
+
+      children: [
+        { path: "/admin/product", element: <AdminProduct /> },
+        { path: "/admin/vendor", element: <VendorTable /> },
+      ],
+    },
+    {
+      path: "/vendor",
+      element: <VendorSignInPages />,
+      children: [
+        { path: "/vendor/addvendor", element: <AddVendor /> },
+        { path: "/vendor/address", element: <VendorAddress /> },
+        { path: "/vendor/payment", element: <VendorPaymentOptions /> },
+        // { path: "/vendor/product", element: <VendorProduct /> },
+      ],
+    },
+    {
+      path: "/vendorpage",
+      element: <VendorPages />,
+      children: [
+        { path: "/vendorpage/product", element: <VendorProduct /> },
+        { path: "/vendorpage/product/new", element: <VendorAddProduct /> },
         {
-          path: "*",
-          element: <Error />,
+          path: "/vendorpage/product/:productId/edit",
+          element: <VendorEditProduct />,
         },
       ],
+    },
+    // {
+    //   path: "/store",
+    //   children: [
+    //     { path: "", element: <Dashboard /> },
+    //     { path: "products", element: <div>Manage Products</div> },
+    //     { path: "orders", element: <div>Manage Orders</div> },
+    //   ],
+    // },
+    {
+      path: "*",
+      element: <Error />,
     },
   ]);
 

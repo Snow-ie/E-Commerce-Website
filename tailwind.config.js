@@ -23,8 +23,10 @@ export default {
         secondary4: "#F5F5F5",
         button5: "#A0BCE0",
       },
+      clipPath: {
+        triangle: "polygon(0 0, 100% 0, 100% 50%, 0 100%)",
+      },
     },
   },
-
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [require("tailwind-scrollbar"), require("@tailwindcss/forms")],
 };

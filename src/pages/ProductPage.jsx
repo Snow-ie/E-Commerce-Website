@@ -72,7 +72,7 @@ const ProductPage = () => {
           </li>
           <li>/</li>
           <li>
-            <Link to="/gaming" className="hover:underlin">
+            <Link to="/gaming" className="hover:underline">
               Gaming
             </Link>
           </li>

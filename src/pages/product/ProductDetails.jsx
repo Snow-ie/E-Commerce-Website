@@ -92,7 +92,7 @@ const ProductDetails = () => {
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6">
         <div className="w-full max-w-xs lg:w-1/2 lg:max-w-md mx-auto">
           <img
-            src={product.image}
+            src={product.images[0]}
             alt={product.name}
             loading="lazy"
             className="w-full h-full object-contain border border-gray-300 rounded-lg"

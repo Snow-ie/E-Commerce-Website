@@ -35,7 +35,7 @@ const SignUp = () => {
   const handleSignUp = async ({ name, email, password }) => {
     try {
       if (name && email && password) {
-        await signup({ name, email, password }); // Ensure signup is async
+        await signup({ name, email, password });
         navigate("/login");
       }
     } catch (err) {

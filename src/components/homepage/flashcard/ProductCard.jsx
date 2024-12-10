@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import "../../../App.css";
 
 const ProductCard = ({ product }) => {
-  const { image, discount, price, discountPrice, rating, reviews, name } =
+  const { images, discount, price, discountPrice, rating, reviews, name } =
     product;
 
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
           }}
         >
           <img
-            src={image}
+            src={images[0]}
             alt={name}
             loading="lazy"
             className="w-full h-[180px] object-contain"
@@ -159,7 +159,7 @@ const ProductCard = ({ product }) => {
           <div className="bg-white rounded-lg p-6 max-w-md shadow-lg transform transition-transform duration-300 ease-out scale-100">
             <div className="flex flex-col items-center animate-fade-in">
               <img
-                src={image}
+                src={images[0]}
                 alt={name}
                 className="w-[120px] h-[120px] object-contain mb-4 rounded-md shadow-md"
               />
