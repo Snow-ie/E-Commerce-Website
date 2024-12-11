@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import useAuthContext from "../hooks/useAuthProvider";
+import useAuthContext from "../../hooks/useAuthProvider";
 import LogoIcon from "../../assets/LogoIcon";
 import SearchIcon from "../../assets/nav/SearchIcon";
 import WishListIcon from "../../assets/nav/WishListIcon";

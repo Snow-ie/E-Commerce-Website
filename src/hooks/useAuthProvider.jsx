@@ -1,8 +1,11 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { useMutation } from "react-query";
+import { handleLogin } from "./api/useAuthService";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const { mutate: loginUser, isLoading, error } = useMutation(handleLogin);
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
 
@@ -10,6 +13,25 @@ export const AuthProvider = ({ children }) => {
     if (!email || !password) {
       throw new Error("Login failed");
     }
+
+    try {
+      console.log("login");
+      loginUser(
+        { email, password },
+        {
+          onSuccess: (data) => {
+            console.log("Login success", data);
+            setUser(data.user); // Adjust according to API response
+            setToken(data.token); // Adjust according to API response
+            localStorage.setItem("email", email);
+            localStorage.setItem("token", data.token);
+          },
+          onError: (err) => {
+            console.error("Login failed", err);
+          },
+        }
+      );
+    } catch (err) {}
     setUser({ email });
     setToken("sample-token");
     localStorage.setItem("email", email);

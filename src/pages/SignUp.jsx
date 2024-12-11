@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import useAuthContext from "../components/hooks/useAuthProvider";
+import useAuthContext from "../hooks/useAuthProvider";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
