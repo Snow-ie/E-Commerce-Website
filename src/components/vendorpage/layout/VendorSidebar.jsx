@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { vendorSidebarItems } from "../../../utils/data";
 import LogoIcon from "../../../assets/LogoIcon";
